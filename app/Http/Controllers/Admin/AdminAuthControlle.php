@@ -11,25 +11,31 @@ class AdminAuthControlle extends Controller {
     public function admin_login(Request $request) {
 
         $user = User::where([
-            'email'    => $request->email,
+            'email' => $request->email,
             'password' => $request->password,
-        ])->count();
+        ])->select('id')->first();
 
-        if ($user == 1) {
-              //Login with JWT Token
+        if ($user !== null) {
+            //Login with JWT Token
 
-            $token = JWTToken::create_token($request->email);
+            $token = JWTToken::create_token($request->email, $user->id);
             return response()->json([
-                'status'  => 'success',
+                'status' => 'success',
                 'message' => 'User Login Successfull',
-                'token'   => $token,
-            ], 200);
+            ], 200)->cookie('token', $token, 60 * 24 * 30);
 
         } else {
             return response()->json([
-                'status'  => 'failed',
+                'status' => 'failed',
                 'message' => 'unauthorized',
             ], 200);
         }
+    }
+
+    public function admin_logout(Request $request) {
+        return response()->json([
+            'status'=> 'success',
+            'message'=> 'User Logout',
+        ])->cookie('token','',-1);
     }
 }
