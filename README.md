@@ -14,7 +14,7 @@ Follow these steps to get the project up and running on your local machine.
 Clone the repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/bhubon/laravel-bookig-appointment/tree/dev
+git clone git clone https://github.com/bhubon/laravel-bookig-appointment/tree/dev
 cd your-repository
 composer install
 php artisan migrate:fresh --seed
