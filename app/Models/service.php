@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class service extends Model
+class Service extends Model
 {
     use HasFactory;
+
+    public function staff(){
+        return $this->belongsToMany(Staff::class,'staff_services');
+    }
 }
