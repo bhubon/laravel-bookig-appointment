@@ -118,10 +118,10 @@ class UserController extends Controller
             $user = User::findOrFail($id);
 
             $validatedData = $request->validate([
-                'name' => 'sometimes|required|string|max:50',
-                'email' => 'sometimes|required|string|email|max:50|unique:users,email,' . $user->id,
-                'password' => 'sometimes|required|string|min:6',
-                'role' => 'sometimes|required|in:admin,staff,customer',
+                'name' => 'required|string|max:50',
+                'email' => 'required|string|email|max:50|unique:users,email,' . $user->id,
+                'password' => 'required|string|min:6',
+                'role' => 'required|in:admin,staff,customer',
             ]);
 
             if (isset($validatedData['password'])) {
