@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             '*',
         ]);
 
-        // $middleware->append(TokenVerificationMiddleware::class);
+        //$middleware->append(TokenVerificationMiddleware::class);
 
     })
     ->withExceptions(function (Exceptions $exceptions) {
