@@ -52,5 +52,8 @@ class DatabaseSeeder extends Seeder {
                 $services->random(rand(1, 10))->pluck('id')->toArray()
             );
         });
+
+
+        $this->call(RolePermissionSeeder::class);
     }
 }
