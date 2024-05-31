@@ -34,6 +34,7 @@ class AdminAuthControlle extends Controller
     }
 
     public function admin_logout(Request $request) {
+        //Logout
         return response()->json([
             'status'=> 'success',
             'message'=> 'User Logout',
