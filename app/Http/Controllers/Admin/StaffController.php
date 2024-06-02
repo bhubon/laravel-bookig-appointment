@@ -46,7 +46,9 @@ class StaffController extends Controller {
                 'info' => 'required|string',
             ]);
 
-            Staff::create($validated);
+            $staff = Staff::create($validated);
+
+            $staff->services()->sync($request->input('services', []));
 
             return response()->json([
                 'status' => 'success',
@@ -72,7 +74,7 @@ class StaffController extends Controller {
      */
     public function show(string $id) {
         try {
-            $staff = Staff::with('user')->findOrFail($id);
+            $staff = Staff::with(['user:id,email', 'services:name,id'])->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'data' => $staff,
@@ -108,6 +110,8 @@ class StaffController extends Controller {
             ]);
 
             $staff->update($validated);
+
+            $staff->services()->sync($request['services']);
 
             return response()->json([
                 'status' => 'success',
