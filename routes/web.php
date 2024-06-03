@@ -15,6 +15,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AdminAuthControlle::class, 'admin_login'])->name('admin.login');
     Route::post('/logout', [AdminAuthControlle::class, 'admin_logout'])->name('admin.logout');
+    Route::post('/forgot-password', [AdminAuthControlle::class, 'forgot_password'])->name('forgot-password');
+    Route::post('/reset-password', [AdminAuthControlle::class, 'reset_password'])->name('reset-password');
 
     //Admin Protected Routes with JWT
 
