@@ -22,7 +22,11 @@ php artisan migrate:fresh --seed
 
 ## Admin Panel
 
-### POST /admin/login
+### Admin Login
+
+```bash
+{{BASE_URL}}/admin/login/
+```
 
 This endpoint is used to authenticate and login as an admin.
 
