@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
-class AdminAuthControlle extends Controller 
+class AdminAuthController extends Controller 
 {
     public function admin_login(Request $request) {
         $request->validate([

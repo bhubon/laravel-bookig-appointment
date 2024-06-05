@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\Time;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -52,5 +53,7 @@ class DatabaseSeeder extends Seeder {
                 $services->random(rand(1, 10))->pluck('id')->toArray()
             );
         });
+
+        Time::factory(10)->create();
     }
 }
