@@ -94,23 +94,6 @@ The request should be sent as a GET request to the specified URL without any pay
 
 #### Response
 
-Upon a successful request, the server will respond with a status code of 200 and a JSON object in the response body with the following schema:
-
-``` json
-{
-    "type": "object",
-    "properties": {
-        "status": {
-            "type": "string"
-        },
-        "data": {
-            "type": "array"
-        },
-    }
-}
-
- ```
-
 The response will contain the following attributes:
 
 - `status`: A string indicating the status of the response.
@@ -150,7 +133,7 @@ The response will contain the following attributes:
 ### Get Single User
 
 ```bash
-{{BASE_URL}}/admin/user/
+{{BASE_URL}}/admin/user/{user_id}
 ```
 
 **Method:** `GET`
@@ -161,59 +144,12 @@ The request should be sent as a GET request to the specified URL without any pay
 
 #### Response
 
-Upon a successful request, the server will respond with a status code of 200 and a JSON object in the response body with the following schema:
 
-```json
-{
-    "type": "object",
-    "properties": {
-        "status": {
-            "type": "string"
-        },
-        "data": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "token": {
-                    "type": "string",
-                    "nullable": true
-                },
-                "role": {
-                    "type": "string"
-                },
-                "verified_at": {
-                    "type": "string",
-                    "nullable": true,
-                    "format": "date-time"
-                },
-                "created_at": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        }
-    }
-}
-
-```
-
-The response will contain the following attributes:
+Upon a successful request, the response will contain the following attributes:
 
 - `status`: A string indicating the status of the response.
     
-- `data`: A string providing additional information about the response.
+- `data`: An obejct with database data about the response.
 
 ```bash
 {
@@ -227,6 +163,83 @@ The response will contain the following attributes:
     "verified_at": null,
     "created_at": "2024-06-02T17:07:20.000000Z",
     "updated_at": "2024-06-02T17:07:20.000000Z"
+}
+
+```
+
+
+
+### Update an User
+
+```bash
+{{BASE_URL}}/admin/user/{user_id}
+```
+
+**Method:** `PUT`
+
+#### Request
+
+The request should be sent as a PUT request to the specified URL with the following payload:
+
+| Key | Type | Description |
+| --- | --- | --- |
+| name | string | The name of the user |
+| email | string | The email of the user |
+| password | string | The password of the user |
+| role | string | The role of the user |
+
+#### Response
+
+
+Upon a successful request, the response will contain the following attributes:
+
+- `status`: A string indicating the status of the response.
+    
+- `data`: An obejct with database data about the response.
+
+```bash
+{
+"status": "success",
+"data": {
+    "id": 1,
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "token": null,
+    "role": "admin",
+    "verified_at": null,
+    "created_at": "2024-06-02T17:07:20.000000Z",
+    "updated_at": "2024-06-02T17:07:20.000000Z"
+}
+
+```
+
+
+### Delete an user
+
+```bash
+{{BASE_URL}}/admin/user/{user_id}
+```
+
+**Method:** `DELETE`
+
+#### Request
+
+The request should be sent as a PUT request to the specified URL without any payload.
+
+
+#### Response
+
+
+Upon a successful request, the response will contain the following attributes:
+
+- `status`: A string indicating the status of the response.
+    
+- `message`: A string providing additional information about the response.
+
+```bash
+{
+    "status": "success",
+    "message": "User deleted successfully."
 }
 
 ```
