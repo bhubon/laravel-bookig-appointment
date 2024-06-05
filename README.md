@@ -84,6 +84,9 @@ The response will contain the following attributes:
 ```bash
 {{BASE_URL}}/admin/user/
 ```
+
+**Method:** `GET`
+
 #### Request
 
 The request should be sent as a GET request to the specified URL without any payload.
@@ -146,11 +149,11 @@ The response will contain the following attributes:
 
 ### Get Single User
 
-**Endpoint:** `/admin/user/{id}`
+```bash
+{{BASE_URL}}/admin/user/
+```
 
 **Method:** `GET`
-
-**Headers:**
 
 #### Request
 
