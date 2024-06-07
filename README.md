@@ -185,7 +185,7 @@ The request should be sent as a PUT request to the specified URL with the follow
 | --- | --- | --- |
 | name | string | The name of the user |
 | email | string | The email of the user |
-| password | string | The password of the user |
+| password | string | The password of the user with Hash method |
 | role | string | The role of the user |
 
 #### Response
