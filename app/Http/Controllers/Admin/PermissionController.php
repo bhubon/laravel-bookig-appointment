@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Staff;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
-class StaffController extends Controller {
+class PermissionController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
         try {
-            $staff = Staff::with('user')->paginate(10);
+            $permissions = Permission::all();
             return response()->json([
                 'status' => 'success',
-                'data' => $staff,
+                'data' => $permissions,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to retrive staff',
+                'message' => 'Failed to retrive permissions',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -31,7 +31,7 @@ class StaffController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-
+        //
     }
 
     /**
@@ -40,32 +40,27 @@ class StaffController extends Controller {
     public function store(Request $request) {
         try {
             $validated = $request->validate([
-                'user_id' => 'required|exists:users,id',
-                'phone' => 'required|string|max:50',
-                'address' => 'required|string',
-                'info' => 'required|string',
+                'name' => 'required|string|max:50',
             ]);
 
-            $staff = Staff::create($validated);
-
-            $staff->services()->sync($request->input('services', []));
+            Permission::create($validated);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff created successfully',
+                'data' => 'Permission Created',
             ]);
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation failed',
-                'error' => $e->errors(),
+                'error' => $e->getMessage(),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to create staff',
+                'message' => 'Failed to create permission',
                 'error' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -74,17 +69,16 @@ class StaffController extends Controller {
      */
     public function show(string $id) {
         try {
-            $staff = Staff::with(['user:id,email', 'services:name,id'])->findOrFail($id);
+            $permission = Permission::findOrFail($id);
             return response()->json([
                 'status' => 'success',
-                'data' => $staff,
+                'data' => $permission,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'No Stuff Found',
-                'error' => $e->getMessage(),
-            ]);
+                'mesage' => 'Permission Not Found',
+            ], 500);
         }
     }
 
@@ -100,35 +94,30 @@ class StaffController extends Controller {
      */
     public function update(Request $request, string $id) {
         try {
-
-            $staff = Staff::findOrFail($id);
-
+            $permission = Permission::findOrFail($id);
             $validated = $request->validate([
-                'phone' => 'required|string|max:50',
-                'address' => 'required|string',
-                'info' => 'required|string',
+                'name' => 'required|string|max:50',
             ]);
 
-            $staff->update($validated);
-
-            $staff->services()->sync($request['services']);
+            $permission->update($validated);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff successfully updated',
+                'mesage' => 'Permission Updated',
             ]);
+
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation failed',
-                'error' => $e->errors(),
-            ]);
+                'error' => $e->getMessage(),
+            ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to update staff',
+                'message' => 'Update Failed',
                 'error' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -137,18 +126,17 @@ class StaffController extends Controller {
      */
     public function destroy(string $id) {
         try {
-            $staff = Staff::findOrFail($id);
-            $staff->delete();
+            Permission::findOrFail($id)->delete();
+
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff deleted successfully',
+                'message' => 'Permission deleted successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Deletion failed',
-                'error' => $e->getMessage(),
-            ]);
+                'message' => 'Failed to delete permission',
+            ],500);
         }
     }
 }

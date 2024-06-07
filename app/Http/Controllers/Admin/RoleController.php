@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 
-class StaffController extends Controller {
+class RoleController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
         try {
-            $staff = Staff::with('user')->paginate(10);
+            $roles = Role::with('permissions')->latest()->paginate(10);
+
             return response()->json([
                 'status' => 'success',
-                'data' => $staff,
+                'data' => $roles
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to retrive staff',
+                'message' => 'No Role Found',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -31,7 +32,7 @@ class StaffController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-
+        //
     }
 
     /**
@@ -40,30 +41,27 @@ class StaffController extends Controller {
     public function store(Request $request) {
         try {
             $validated = $request->validate([
-                'user_id' => 'required|exists:users,id',
-                'phone' => 'required|string|max:50',
-                'address' => 'required|string',
-                'info' => 'required|string',
+                'name' => 'required|string|max:50',
+                'permissions' => 'array'
             ]);
 
-            $staff = Staff::create($validated);
-
-            $staff->services()->sync($request->input('services', []));
-
+            $role = Role::create($validated);
+            $role->syncPermissions($validated['permissions']);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff created successfully',
+                'message' => 'Role created successfully '
             ]);
+
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation failed',
-                'error' => $e->errors(),
+                'error' => $e->getMessage(),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to create staff',
+                'message' => 'Failed to create role',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -74,15 +72,16 @@ class StaffController extends Controller {
      */
     public function show(string $id) {
         try {
-            $staff = Staff::with(['user:id,email', 'services:name,id'])->findOrFail($id);
+            $role = Role::with('permissions')->findOrFail($id);
+
             return response()->json([
                 'status' => 'success',
-                'data' => $staff,
+                'data' => $role
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'No Stuff Found',
+                'message' => 'No Role Found',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -92,7 +91,7 @@ class StaffController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(string $id) {
-        //
+
     }
 
     /**
@@ -100,33 +99,31 @@ class StaffController extends Controller {
      */
     public function update(Request $request, string $id) {
         try {
-
-            $staff = Staff::findOrFail($id);
-
+            $role = Role::findOrFail($id);
             $validated = $request->validate([
-                'phone' => 'required|string|max:50',
-                'address' => 'required|string',
-                'info' => 'required|string',
+                'name' => 'required|string|max:50',
+                'permissions' => 'array'
             ]);
 
-            $staff->update($validated);
+            $role->update($validated);
 
-            $staff->services()->sync($request['services']);
+            $role->syncPermissions($validated['permissions']);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff successfully updated',
+                'message' => 'Role successfully updated',
+                'data' => $role
             ]);
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation failed',
-                'error' => $e->errors(),
+                'error' => $e->getMessage(),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Failed to update staff',
+                'message' => 'Faield to update role',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -137,16 +134,16 @@ class StaffController extends Controller {
      */
     public function destroy(string $id) {
         try {
-            $staff = Staff::findOrFail($id);
-            $staff->delete();
+            $role = Role::findOrFail($id);
+            $role->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Staff deleted successfully',
+                'message' => 'Role deleted successfully'
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Deletion failed',
+                'message' => 'Faield to delete role',
                 'error' => $e->getMessage(),
             ]);
         }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthControlle;
@@ -22,5 +24,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/staff', StaffController::class);
         Route::resource('/customer', CustomerController::class);
         Route::resource('/user', UserController::class);
+
+        Route::resource('/permissions', PermissionController::class);
+        Route::resource('/roles', RoleController::class);
+
     });
 });
