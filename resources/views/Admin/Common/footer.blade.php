@@ -15,6 +15,7 @@
 </footer>
 </div><!-- sl-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
+
 <script src="{{ asset('assets') }}/lib/jquery/jquery.js"></script>
 <script src="{{ asset('assets') }}/lib/popper.js/popper.js"></script>
 <script src="{{ asset('assets') }}/lib/bootstrap/bootstrap.js"></script>

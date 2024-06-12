@@ -35,11 +35,11 @@
     <link href="{{ asset('assets/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('assets') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link href="{{ asset('assets/lib/highlightjs/github.css') }}" rel="stylesheet">
     <link href="{{ asset('assets') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="{{asset('assets/css/toastify.min.css')}}" rel="stylesheet" />
 
   <!-- Datatable css -->
-  <link href="{{ asset('assets/lib/highlightjs/github.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/lib/select2/css/select2.min.css') }}" rel="stylesheet">
 
@@ -48,6 +48,11 @@
     <script src="{{asset('assets/js/toastify-js.js')}}"></script>
     <script src="{{asset('assets/js/axios.min.js')}}"></script>
     <script src="{{asset('assets/js/config.js')}}"></script>
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </head>
 

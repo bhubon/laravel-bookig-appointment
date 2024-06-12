@@ -22,6 +22,24 @@ class StaffScheduleController extends Controller
     }
 
 
+    public function staffList()
+    {
+        try {
+            $users = User::where('role', 'staff')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $users
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Failed to retrieve users',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     public function index()
     {
         try {
@@ -50,7 +68,7 @@ class StaffScheduleController extends Controller
      */
     public function create()
     {
-        $staffs = User::where('role','staff')->get();
+        
     }
 
     /**

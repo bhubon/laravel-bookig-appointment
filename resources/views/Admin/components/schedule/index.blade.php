@@ -22,21 +22,19 @@
 
 
 <script>
-
-getList();
-
+  getList();
 
 async function getList() {
-
-
-
     let res=await axios.get("/admin/staff-schedule");
 
     let tableList=$("#tableList");
     let tableData=$("#datatable1");
 
-    tableData.DataTable().destroy();
-    tableList.empty();
+        // Destroy existing DataTable instance before reinitializing
+        if ($.fn.DataTable.isDataTable(tableData)) {
+            tableData.DataTable().destroy();
+        }
+        tableList.empty();
 
     res.data.data.forEach(function (item,index) {
         let row=`<tr>
@@ -53,25 +51,18 @@ async function getList() {
 
     $('.editBtn').on('click', async function () {
            let id= $(this).data('id');
-           let filePath= $(this).data('path');
-           await FillUpUpdateForm(id,filePath)
+           console.log("Edit button clicked, ID:", id); // Debug log
+           await FillUpUpdateForm(id)
            $("#update-modal").modal('show');
-    })
+    });
 
     $('.deleteBtn').on('click',function () {
         let id= $(this).data('id');
-        let path= $(this).data('path');
 
         $("#delete-modal").modal('show');
         $("#deleteID").val(id);
-        $("#deleteFilePath").val(path)
 
     })
-
-    new DataTable('#tableData',{
-        order:[[0,'desc']],
-        lengthMenu:[5,10,15,20,30]
-    });
 
 }
 
