@@ -9,7 +9,7 @@ class Schedule extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['staff_id','service_id','date'];
+    protected $fillable = ['user_id','service_id','date'];
 
     public function times(){
         return $this->hasMany(Time::class);
@@ -17,5 +17,9 @@ class Schedule extends Model
 
     public function service(){
         return $this->belongsTo(Service::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

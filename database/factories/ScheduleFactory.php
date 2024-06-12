@@ -23,7 +23,7 @@ class ScheduleFactory extends Factory
         $staffUsers = User::where('role', 'staff')->inRandomOrder()->limit(3)->get();
 
         return [
-            'staff_id'   => $staffUsers->random()->id,
+            'user_id'   => $staffUsers->random()->id,
             'service_id' => Service::inRandomOrder()->first()->id,
             'date'       => $this->faker->dateTimeBetween('tomorrow', '+30 days')->format('Y-m-d'),
         ];
