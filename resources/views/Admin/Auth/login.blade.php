@@ -38,39 +38,44 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/starlight.css">
-    <link href="{{asset('assets/css/toastify.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/toastify.min.css') }}" rel="stylesheet" />
 
 </head>
 
 <body>
 
+    <div id="loader" class="d-none"></div>
+
     <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
 
-        <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
-            <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span
-                    class="tx-info tx-normal">admin</span></div>
-            <div class="tx-center mg-b-60">Professional Admin Template Design</div>
+        <form onsubmit="SubmitLogin(event)">
+            <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
+                <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span
+                        class="tx-info tx-normal">admin</span></div>
+                <div class="tx-center mg-b-60">Professional Admin Template Design</div>
 
-            <div class="form-group">
-                <input type="text" class="form-control" id="email" placeholder="Enter your email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Enter your password">
-                <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
-            </div>
-            <button type="submit" class="btn btn-info btn-block" onclick="SubmitLogin()">Sign In</button>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-info btn-block" style="cursor:pointer;">Sign
+                    In</button>
 
-            <div class="mg-t-60 tx-center">Not yet a member? <a href="page-signup.html" class="tx-info">Sign Up</a>
+                <div class="mg-t-60 tx-center">Not yet a member? <a href="page-signup.html" class="tx-info">Sign Up</a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <script src="{{ asset('assets') }}/lib/jquery/jquery.js"></script>
     <script src="{{ asset('assets') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('assets') }}/lib/bootstrap/bootstrap.js"></script>
-    <script src="{{asset('assets/js/toastify-js.js')}}"></script>
-    <script src="{{asset('assets/js/axios.min.js')}}"></script>
-    <script src="{{asset('assets/js/config.js')}}"></script>
+    <script src="{{ asset('assets/js/toastify-js.js') }}"></script>
+    <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
 
 </body>
 
@@ -78,28 +83,35 @@
 
 
 <script>
+    async function SubmitLogin(event) {
 
-  async function SubmitLogin() {
-            let email=document.getElementById('email').value;
-            let password=document.getElementById('password').value;
+        event.preventDefault();
 
-            if(email.length===0){
-                errorToast("Email is required");
-            }
-            else if(password.length===0){
-                errorToast("Password is required");
-            }
-            else{
-                
-                let res=await axios.post("/admin/login",{email:email, password:password});
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
 
-                if(res.status===200 && res.data['status']==='success'){
-                    window.location.href="/admin/dashboard";
-                }
-                else{
-                    errorToast(res.data['message']);
-                }
+        if (email.length === 0) {
+            errorToast("Email is required");
+        } else if (password.length === 0) {
+            errorToast("Password is required");
+        } else {
+
+            showLoader();
+
+            let res = await axios.post("/admin/login", {
+                email: email,
+                password: password
+            });
+
+            if (res.status === 200 && res.data['status'] === 'success') {
+                window.location.href = "/admin/dashboard";
+            } else if (res.data['message'] === 'Unauthorized') {
+                errorToast('Invalid login credential!');
+            } else {
+                errorToast(res.data['message']);
             }
+
+            hideLoader();
+        }
     }
-
 </script>

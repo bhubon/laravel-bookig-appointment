@@ -10,27 +10,41 @@ use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Time;
 
-class StaffScheduleController extends Controller
-{
+class StaffScheduleController extends Controller {
     /**
      * Display a listing of the resource.
      */
 
-    function schedulePage()
-    {
+    function schedulePage() {
         return view('admin.pages.schedule-page');
     }
 
 
-    public function index()
-    {
+    public function staffList() {
+        try {
+            $users = User::where('role', 'staff')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $users
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Failed to retrieve users',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    public function index() {
         try {
             $schedules = Schedule::with(['times', 'service', 'user'])
-                                ->whereHas('user', function($query) {
-                                    $query->where('role', 'staff');
-                                })
-                                ->get();
-                                 
+                ->whereHas('user', function ($query) {
+                    $query->where('role', 'staff');
+                })
+                ->get();
+
             return response()->json([
                 'status' => 'success',
                 'data' => $schedules
@@ -48,16 +62,14 @@ class StaffScheduleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $staffs = User::where('role','staff')->get();
+    public function create() {
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         try {
             $request->validate([
                 'service_id' => 'required|exists:services,id',
@@ -69,8 +81,8 @@ class StaffScheduleController extends Controller
 
             $user_id = $request->user_id;
             $existingSchedule = Schedule::where('user_id', $user_id)
-                                        ->where('date', $request->date)
-                                        ->first();
+                ->where('date', $request->date)
+                ->first();
             if ($existingSchedule) {
                 return response()->json([
                     'status' => 'failed',
@@ -114,8 +126,7 @@ class StaffScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         try {
             $schedule = Schedule::with(['times', 'service', 'user'])->find($id);
 
@@ -143,16 +154,14 @@ class StaffScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         try {
             // Validate request
             $request->validate([
@@ -172,9 +181,9 @@ class StaffScheduleController extends Controller
 
             // Check if the combination of user_id and date already exists in other records
             $existingSchedule = Schedule::where('user_id', $schedule->user_id)
-                                        ->where('date', $schedule->date)
-                                        ->where('id', '!=', $id)
-                                        ->first();
+                ->where('date', $schedule->date)
+                ->where('id', '!=', $id)
+                ->first();
             if ($existingSchedule) {
                 return response()->json([
                     'status' => 'failed',
@@ -219,8 +228,7 @@ class StaffScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id) {
         try {
             $schedule = Schedule::find($id);
 

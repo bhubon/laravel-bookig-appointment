@@ -25,21 +25,31 @@ Route::prefix('admin')->group(function () {
     // Authentication Routes
     Route::get('/login', [AdminAuthController::class, 'admin_login_view'])->name('admin.login_view');
     Route::post('/login', [AdminAuthController::class, 'admin_login'])->name('admin.login');
-    Route::get('/logout', [AdminAuthController::class, 'admin_logout'])->name('admin.logout');
+
 
     // Admin Protected Routes with JWT
     Route::middleware([TokenVerificationMiddleware::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/logout', [AdminAuthController::class, 'admin_logout'])->name('admin.logout');
+
+
         Route::resource('staff', StaffController::class);
         Route::resource('customer', CustomerController::class);
         Route::resource('user', UserController::class);
         Route::resource('service', ServiceController::class);
 
         Route::resource('staff-schedule', StaffScheduleController::class);
-        Route::get('/schedulePage',[StaffScheduleController::class,'schedulePage']);
+        Route::get('/schedulePage', [StaffScheduleController::class, 'schedulePage']);
+        Route::get('/staffList', [StaffScheduleController::class,'staffList']);
 
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
+
+
+        //Views
+
+        Route::get('/users',[UserController::class,'user_index'])->name('user.all');
+
     });
 });
 
