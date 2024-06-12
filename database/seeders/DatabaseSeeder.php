@@ -54,11 +54,7 @@ class DatabaseSeeder extends Seeder {
             );
         });
 
-<<<<<<< HEAD
-        Time::factory(10)->create();
-=======
 
         $this->call(RolePermissionSeeder::class);
->>>>>>> ac9427e0060dea4f4fe1bc1a089a104183b770d2
     }
 }
