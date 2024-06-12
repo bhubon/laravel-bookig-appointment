@@ -38,6 +38,8 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/starlight.css">
+    <link href="{{asset('assets/css/toastify.min.css')}}" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -50,23 +52,54 @@
             <div class="tx-center mg-b-60">Professional Admin Template Design</div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter your username">
-            </div><!-- form-group -->
+                <input type="text" class="form-control" id="email" placeholder="Enter your email">
+            </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Enter your password">
+                <input type="password" class="form-control" id="password" placeholder="Enter your password">
                 <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
-            </div><!-- form-group -->
-            <button type="submit" class="btn btn-info btn-block">Sign In</button>
+            </div>
+            <button type="submit" class="btn btn-info btn-block" onclick="SubmitLogin()">Sign In</button>
 
             <div class="mg-t-60 tx-center">Not yet a member? <a href="page-signup.html" class="tx-info">Sign Up</a>
             </div>
-        </div><!-- login-wrapper -->
-    </div><!-- d-flex -->
+        </div>
+    </div>
 
     <script src="{{ asset('assets') }}/lib/jquery/jquery.js"></script>
     <script src="{{ asset('assets') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('assets') }}/lib/bootstrap/bootstrap.js"></script>
+    <script src="{{asset('assets/js/toastify-js.js')}}"></script>
+    <script src="{{asset('assets/js/axios.min.js')}}"></script>
+    <script src="{{asset('assets/js/config.js')}}"></script>
 
 </body>
 
 </html>
+
+
+<script>
+
+  async function SubmitLogin() {
+            let email=document.getElementById('email').value;
+            let password=document.getElementById('password').value;
+
+            if(email.length===0){
+                errorToast("Email is required");
+            }
+            else if(password.length===0){
+                errorToast("Password is required");
+            }
+            else{
+                
+                let res=await axios.post("/admin/login",{email:email, password:password});
+
+                if(res.status===200 && res.data['status']==='success'){
+                    window.location.href="/admin/dashboard";
+                }
+                else{
+                    errorToast(res.data['message']);
+                }
+            }
+    }
+
+</script>

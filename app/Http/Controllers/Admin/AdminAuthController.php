@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
-class AdminAuthControlle extends Controller {
+
+class AdminAuthController extends Controller 
+{
 
     public function admin_login_view() {
         return view("Admin.Auth.login");
     }
+
     public function admin_login(Request $request) {
         $request->validate([
             'email' => 'required|email',
@@ -37,10 +40,6 @@ class AdminAuthControlle extends Controller {
     }
 
     public function admin_logout(Request $request) {
-        //Logout
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User Logout',
-        ])->cookie('token', '', -1);
+        return redirect('/admin/login')->cookie('token','',-1);
     }
 }
