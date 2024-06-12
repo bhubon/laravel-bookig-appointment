@@ -23,8 +23,15 @@ class JWTToken {
     public static function verify_token($token): string|object {
         try {
             $key = env('JWT_KEY');
-            $decode = JWT::decode($token, new Key($key, 'HS256'));
-            return $decode;
+
+            if ($token !== null) {
+                $decode = JWT::decode($token, new Key($key, 'HS256'));
+                return $decode;
+
+            } else {
+                return 'unauthorized';
+            }
+
         } catch (\Exception $e) {
             return 'unauthorized';
         }
