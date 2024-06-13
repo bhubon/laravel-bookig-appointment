@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('staff-schedule', StaffScheduleController::class);
         Route::get('/schedulePage',[StaffScheduleController::class,'schedulePage']);
         Route::get('/staffList', [StaffScheduleController::class,'staffList']);
+        Route::post('/update-schedule',[StaffScheduleController::class,'updateSchedule']);
 
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);

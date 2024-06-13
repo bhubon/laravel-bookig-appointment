@@ -42,6 +42,7 @@
   <!-- Datatable css -->
   <link href="{{ asset('assets/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/lib/select2/css/select2.min.css') }}" rel="stylesheet">
+   <link href="{{ asset('assets') }}/lib/spectrum/spectrum.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/starlight.css">

@@ -169,70 +169,160 @@ class StaffScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        try {
-            // Validate request
-            $request->validate([
-                'service_id' => 'required|exists:services,id',
-                'time' => 'required|array',
-                'time.*' => 'required|string'
-            ]);
+public function update(Request $request, string $id)
+{
+    try {
+        // Log raw input for debugging
+        \Log::info('Raw Input', $request->all());
 
-            $schedule = Schedule::find($id);
+        // Validate request
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'service_id' => 'required|exists:services,id',
+            'date' => 'required|date',
+            'time' => 'required|array',
+            'time.*' => 'required|string'
+        ]);
 
-            if (!$schedule) {
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Schedule not found'
-                ], 404);
-            }
+        // Log the received data for debugging
+        \Log::info('Validated Data', [
+            'user_id' => $request->input('user_id'),
+            'service_id' => $request->input('service_id'),
+            'date' => $request->input('date'),
+            'times' => $request->input('time')
+        ]);
 
-            // Check if the combination of user_id and date already exists in other records
-            $existingSchedule = Schedule::where('user_id', $schedule->user_id)
-                                        ->where('date', $schedule->date)
-                                        ->where('id', '!=', $id)
-                                        ->first();
-            if ($existingSchedule) {
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Schedule for this date already exists for the staff.'
-                ], 422);
-            }
+        $schedule = Schedule::find($id);
 
-            // Update the schedule's service and times
-            $schedule->update([
-                'service_id' => $request->service_id,
-            ]);
-
-            // Delete existing times and create new ones
-            $schedule->times()->delete();
-            foreach ($request->time as $time) {
-                Time::create([
-                    'schedule_id' => $schedule->id,
-                    'time' => $time
-                ]);
-            }
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Schedule updated successfully'
-            ], 200);
-
-        } catch (ValidationException $e) {
+        if (!$schedule) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Validation Failed',
-                'errors' => $e->errors()
-            ], 422);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Schedule update failed',
-                'error' => $e->getMessage()
-            ], 500);
+                'message' => 'Schedule not found'
+            ], 404);
         }
+
+        // Check if the combination of user_id and date already exists in other records
+        $existingSchedule = Schedule::where('user_id', $request->user_id)
+                                ->where('date', $request->date)
+                                ->where('id', '!=', $id)
+                                ->first();
+        if ($existingSchedule) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Schedule for this date already exists for the staff.'
+            ], 422);
+        }
+
+        // Update the schedule's service and times
+        $schedule->update([
+            'user_id' => $request->user_id,
+            'service_id' => $request->service_id,
+            'date' => $request->date,
+        ]);
+
+        // Delete existing times and create new ones
+        $schedule->times()->delete();
+        foreach ($request->time as $time) {
+            Time::create([
+                'schedule_id' => $schedule->id,
+                'time' => $time
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Schedule updated successfully'
+        ], 200);
+
+    } catch (ValidationException $e) {
+        return response()->json([
+            'status' => 'failed',
+            'message' => 'Validation Failed',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'failed',
+            'message' => 'Schedule update failed',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
+
+
+public function updateSchedule(Request $request)
+{
+    try {
+
+        // Validate request
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'service_id' => 'required|exists:services,id',
+            'date' => 'required|date',
+            'time' => 'required|array',
+            'time.*' => 'required|string'
+        ]);
+
+        $id=$request->input('id');
+
+        $schedule = Schedule::find($id);
+
+        if (!$schedule) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Schedule not found'
+            ], 404);
+        }
+
+        // Check if the combination of user_id and date already exists in other records
+        $existingSchedule = Schedule::where('user_id', $request->user_id)
+                                ->where('date', $request->date)
+                                ->where('id', '!=', $id)
+                                ->first();
+        if ($existingSchedule) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Schedule for this date already exists for the staff.'
+            ], 422);
+        }
+
+        // Update the schedule's service and times
+        $schedule->update([
+            'user_id' => $request->user_id,
+            'service_id' => $request->service_id,
+            'date' => $request->date,
+        ]);
+
+        // Delete existing times and create new ones
+        $schedule->times()->delete();
+        foreach ($request->time as $time) {
+            Time::create([
+                'schedule_id' => $schedule->id,
+                'time' => $time
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Schedule updated successfully'
+        ], 200);
+
+    } catch (ValidationException $e) {
+        return response()->json([
+            'status' => 'failed',
+            'message' => 'Validation Failed',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'failed',
+            'message' => 'Schedule update failed',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+
 
     /**
      * Remove the specified resource from storage.
