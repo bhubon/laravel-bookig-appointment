@@ -33,7 +33,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('staff', StaffController::class);
         Route::resource('customer', CustomerController::class);
         Route::resource('user', UserController::class);
+
+        Route::get('/servicePage',[ServiceController::class,'servicePage']);
         Route::resource('service', ServiceController::class);
+         Route::post('/update-service',[ServiceController::class,'updateService']);
 
         Route::resource('staff-schedule', StaffScheduleController::class);
         Route::get('/schedulePage',[StaffScheduleController::class,'schedulePage']);

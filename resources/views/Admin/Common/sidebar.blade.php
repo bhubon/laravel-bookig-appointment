@@ -39,6 +39,11 @@
     <link href="{{ asset('assets') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="{{asset('assets/css/toastify.min.css')}}" rel="stylesheet" />
 
+    <!-- summernote css -->
+    <link href="{{ asset('assets/lib/medium-editor/medium-editor.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/medium-editor/default.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
+
   <!-- Datatable css -->
   <link href="{{ asset('assets/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/lib/select2/css/select2.min.css') }}" rel="stylesheet">
@@ -75,6 +80,14 @@
                 <div class="sl-menu-item">
                     <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
                     <span class="menu-item-label">Dashboard</span>
+                </div>
+            </a>
+
+
+            <a href="{{url("/admin/servicePage")}}" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="icon ion-ios-person-outline tx-22"></i>
+                    <span class="menu-item-label">Service List</span>
                 </div>
             </a>
 

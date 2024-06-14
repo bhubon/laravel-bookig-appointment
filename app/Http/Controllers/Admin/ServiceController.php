@@ -13,6 +13,13 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    function servicePage()
+    {
+        return view('admin.pages.service-page');
+    }
+
+
     public function index()
     {
         try {
@@ -145,6 +152,45 @@ class ServiceController extends Controller
         }
     }
 
+
+
+    public function updateService(Request $request)
+    {
+        try {
+
+            $id=$request->input('id');
+            
+            $service = Service::findOrFail($id);
+
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:50',
+                'description' => 'required|string',
+                'duration' => 'required|string',
+                'price' => 'required|numeric',
+            ]);
+
+            $service->update($validatedData);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Service updated successfully.',
+                'data' => $service
+            ], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Validation Failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Update failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -153,11 +199,18 @@ class ServiceController extends Controller
         try {
             $service = Service::findOrFail($id);
             $service->delete();
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Service deleted successfully.'
             ], 200);
 
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Service not found',
+                'error' => $e->getMessage()
+            ], 404);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
