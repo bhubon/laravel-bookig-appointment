@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\StaffScheduleController;
 
 use App\Http\Controllers\Customer\AppointmentController;
@@ -45,6 +46,13 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
+
+        Route::get('/userProfile',[UserProfileController::class,'ProfilePage']);
+        Route::get('/user-profile',[UserProfileController::class,'UserProfile']);
+        Route::post('/user-update',[UserProfileController::class,'UpdateProfile']);
+
+        Route::get('/user-password',[UserProfileController::class,'PasswordPage']);
+        Route::post('/user-password-update',[UserProfileController::class,'UpdatePassword']);
     });
 });
 
