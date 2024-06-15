@@ -82,7 +82,7 @@
 
             $("#save-form").
 
-            getList();
+            // await getList();
 
             hideLoader();
         }

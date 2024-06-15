@@ -29,12 +29,7 @@ async function getList() {
 
     let tableList=$("#tableList");
     let tableData=$("#datatable1");
-
-        // Destroy existing DataTable instance before reinitializing
-        // if ($.fn.DataTable.isDataTable(tableData)) {
-        //     tableData.DataTable().destroy();
-        // }
-        tableList.empty();
+    tableList.empty();
 
     res.data.data.forEach(function (item,index) {
         let row=`<tr>

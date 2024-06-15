@@ -117,7 +117,7 @@ class UserController extends Controller {
             $validatedData = $request->validate([
                 'name' => 'required|string|max:50',
                 'email' => 'required|string|email|max:50|unique:users,email,' . $user->id,
-                'password' => 'required|string|min:6',
+                'password' => 'nullable|string|min:6',
                 'role' => 'required|in:admin,staff,customer',
             ]);
 
@@ -130,7 +130,6 @@ class UserController extends Controller {
             return response()->json([
                 'status' => 'success',
                 'message' => 'User updated successfully.',
-                'data' => $user
             ], 200);
 
         } catch (ValidationException $e) {
