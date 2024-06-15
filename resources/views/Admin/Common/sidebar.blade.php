@@ -81,6 +81,13 @@
                 </div>
             </a>
 
+            <a href="{{ route('staff.all') }}" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="icon ion-ios-person-outline tx-22"></i>
+                    <span class="menu-item-label">Staff</span>
+                </div>
+            </a>
+
             <a href="{{ route('user.all') }}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>

@@ -167,4 +167,21 @@ class UserController extends Controller {
             ], 500);
         }
     }
+
+    // Non staff user
+    public function get_users(){
+        try {
+            $users = User::whereIn('role', ['customer'])->latest('id')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $users
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Failed to retrieve users',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

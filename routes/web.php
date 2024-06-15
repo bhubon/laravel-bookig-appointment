@@ -45,10 +45,13 @@ Route::prefix('admin')->group(function () {
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
 
+        route::get('/all-users',[UserController::class,'get_users']);
+
 
         //Views
 
         Route::get('/users',[UserController::class,'user_index'])->name('user.all');
+        Route::get('/staff-list',[StaffController::class,'staff_index'])->name('staff.all');
 
     });
 });

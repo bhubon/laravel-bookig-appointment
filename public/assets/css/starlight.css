@@ -57855,12 +57855,29 @@ div#loader::before {
 
 @keyframes scrollLoading {
   0% {
-      left: -100%;
+    left: -100%;
   }
+
   50% {
-      left: 0;
+    left: 0;
   }
+
   100% {
-      left: 100%;
+    left: 100%;
   }
+}
+
+
+.services_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.services_list span {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 5px;
+  padding: 1px 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
 }
