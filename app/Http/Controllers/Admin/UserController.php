@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Validation\ValidationException; 
+use Illuminate\Validation\ValidationException;
 use Exception;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         try {
             $users = User::all();
             return response()->json([
@@ -31,19 +29,21 @@ class UserController extends Controller
         }
     }
 
+    public function user_index() {
+        return view('Admin.Pages.user');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         try {
             $request->validate([
                 'name' => 'required|string|max:50',
@@ -61,21 +61,21 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Registration Success.'
+                'message' => 'User Successfully Added.'
             ], 200);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation Failed',
-                'errors' => $e->errors() 
-            ], 422); 
+                'errors' => $e->errors()
+            ], 422);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Registration Failed',
-                'error' => $e->getMessage() 
-            ], 500); 
+                'error' => $e->getMessage()
+            ], 500);
         }
 
     }
@@ -84,8 +84,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         try {
             $user = User::findOrFail($id);
             return response()->json([
@@ -104,23 +103,21 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         try {
             $user = User::findOrFail($id);
 
             $validatedData = $request->validate([
                 'name' => 'required|string|max:50',
                 'email' => 'required|string|email|max:50|unique:users,email,' . $user->id,
-                'password' => 'required|string|min:6',
+                'password' => 'nullable|string|min:6',
                 'role' => 'required|in:admin,staff,customer',
             ]);
 
@@ -133,7 +130,6 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'User updated successfully.',
-                'data' => $user
             ], 200);
 
         } catch (ValidationException $e) {
@@ -154,8 +150,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id) {
         try {
             $user = User::findOrFail($id);
             $user->delete();
@@ -168,6 +163,23 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Deletion Failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Non staff user
+    public function get_users(){
+        try {
+            $users = User::whereIn('role', ['customer'])->latest('id')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $users
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Failed to retrieve users',
                 'error' => $e->getMessage()
             ], 500);
         }
