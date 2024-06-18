@@ -243,3 +243,175 @@ Upon a successful request, the response will contain the following attributes:
 }
 
 ```
+
+
+### Staff API Documentation
+This API allows you to manage staff resources in the application. It includes endpoints for listing, creating, viewing, updating, and deleting staff.
+
+```bash
+{{BASE_URL}}/admin/staff/
+```
+
+Endpoints
+List Staff
+GET /admin/staff/
+
+Retrieves a paginated list of staff members.
+
+#### Response
+
+```json
+
+{
+    "status": "success",
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 1,
+                "user_id": 1,
+                "phone": "123456789",
+                "address": "123 Main St",
+                "info": "Some info",
+                "created_at": "2024-06-02T17:07:20.000000Z",
+                "updated_at": "2024-06-02T17:07:20.000000Z"
+            },
+            
+        ],
+        
+    }
+}
+```
+### Create Staff
+POST /admin/staff/
+
+Creates a new staff member.
+
+#### Request
+
+```json
+{
+    "user_id": 1,
+    "phone": "123456789",
+    "address": "123 Main St",
+    "info": "Some info",
+    "services": [1, 2, 3]
+}
+```
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Staff created successfully"
+}
+```
+### View Staff
+GET /admin/staff/{id}
+
+Retrieves a specific staff member by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "phone": "123456789",
+        "address": "123 Main St",
+        "info": "Some info",
+        "services": [
+            {
+                "id": 1,
+                "name": "Service 1"
+            },
+            
+        ],
+        "created_at": "2024-06-02T17:07:20.000000Z",
+        "updated_at": "2024-06-02T17:07:20.000000Z"
+    }
+}
+```
+### Update Staff
+PUT /admin/staff/{id}
+
+Updates an existing staff member.
+
+#### Request
+
+```json
+{
+    "phone": "987654321",
+    "address": "456 Main St",
+    "info": "Updated info",
+    "services": [1, 2]
+}
+```
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Staff successfully updated"
+}
+```
+### Delete Staff
+DELETE /admin/staff/{id}
+
+Deletes a specific staff member by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Staff deleted successfully"
+}
+```
+### Error Responses
+All endpoints can return error responses in the following format:
+
+### Validation Error
+
+```json
+{
+    "status": "failed",
+    "message": "Validation failed",
+    "error": {
+        "field_name": ["Error message"]
+    }
+}
+```
+#### General Error
+
+```json
+{
+    "status": "failed",
+    "message": "Error message",
+    "error": "Detailed error message"
+}
+```
+### Example Usage
+Create Staff Example
+
+```sh
+curl -X POST {{BASE_URL}}/admin/staff/ -H "Content-Type: application/json" -d '{
+    "user_id": 1,
+    "phone": "123456789",
+    "address": "123 Main St",
+    "info": "Some info",
+    "services": [1, 2, 3]
+}'
+```
+### Update Staff Example
+
+```sh
+curl -X PUT {{BASE_URL}}/admin/staff/1 -H "Content-Type: application/json" -d '{
+    "phone": "987654321",
+    "address": "456 Main St",
+    "info": "Updated info",
+    "services": [1, 2]
+}'
+```
