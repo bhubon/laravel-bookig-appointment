@@ -415,3 +415,280 @@ curl -X PUT {{BASE_URL}}/admin/staff/1 -H "Content-Type: application/json" -d '{
     "services": [1, 2]
 }'
 ```
+
+### Customer API Documentation
+This API allows you to manage customer resources in the application. It includes endpoints for listing, creating, viewing, updating, and deleting customers.
+
+```bash
+{{BASE_URL}}/admin/customers/
+```
+
+Endpoints
+List Customers
+GET /admin/customers/
+
+Retrieves a list of all customers.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "phone": "123456789",
+            "address": "123 Main St",
+            "user": {
+                "id": 1,
+                "name": "John Doe",
+                "email": "john.doe@example.com"
+            }
+        },
+        
+    ]
+}
+```
+### Create Customer
+POST /admin/customers/
+
+Creates a new customer.
+
+#### Request
+
+```json
+{
+    "user_id": 1,
+    "phone": "123456789",
+    "address": "123 Main St"
+}
+```
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Customer created successfully",
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "phone": "123456789",
+        "address": "123 Main St"
+    }
+}
+```
+### View Customer
+GET /admin/customers/{id}
+
+Retrieves a specific customer by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "phone": "123456789",
+        "address": "123 Main St",
+        "user": {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+        }
+    }
+}
+```
+### Update Customer
+PUT /admin/customers/{id}
+
+Updates an existing customer.
+
+#### Request
+
+```json
+{
+    "phone": "987654321",
+    "address": "456 Main St"
+}
+```
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Customer updated successfully",
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "phone": "987654321",
+        "address": "456 Main St"
+    }
+}
+```
+### Delete Customer
+DELETE /admin/customers/{id}
+
+Deletes a specific customer by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Customer deleted successfully"
+}
+```
+### Error Responses
+All endpoints can return error responses in the following format:
+
+Validation Error
+
+```json
+{
+    "status": "failed",
+    "message": "Validation Failed",
+    "errors": {
+        "field_name": ["Error message"]
+    }
+}
+```
+### General Error
+
+```json
+{
+    "status": "failed",
+    "message": "Error message",
+    "error": "Detailed error message"
+}
+```
+
+### Permission API Documentation
+This API allows you to manage permissions in the application. It includes endpoints for listing, creating, viewing, updating, and deleting permissions.
+
+```bash
+{{BASE_URL}}/admin/permissions/
+```
+
+Endpoints
+List Permissions
+GET /admin/permissions/
+
+Retrieves a list of all permissions.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "name": "edit articles",
+            "guard_name": "web",
+            "created_at": "2024-06-02T17:07:20.000000Z",
+            "updated_at": "2024-06-02T17:07:20.000000Z"
+        },
+    
+    ]
+}
+```
+### Create Permission
+POST /admin/permissions/
+
+Creates a new permission.
+
+#### Request
+
+```json
+{
+    "name": "edit articles"
+}
+```
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": "Permission Created"
+}
+```
+### View Permission
+GET /admin/permissions/{id}
+
+Retrieves a specific permission by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "name": "edit articles",
+        "guard_name": "web",
+        "created_at": "2024-06-02T17:07:20.000000Z",
+        "updated_at": "2024-06-02T17:07:20.000000Z"
+    }
+}
+```
+### Update Permission
+PUT /admin/permissions/{id}
+
+Updates an existing permission.
+
+#### Request
+
+```json
+{
+    "name": "edit articles"
+}
+```
+### Response
+
+```json
+{
+    "status": "success",
+    "message": "Permission Updated"
+}
+```
+### Delete Permission
+DELETE /admin/permissions/{id}
+
+Deletes a specific permission by ID.
+
+#### Response
+
+```json
+{
+    "status": "success",
+    "message": "Permission deleted successfully"
+}
+```
+### Error Responses
+All endpoints can return error responses in the following format:
+
+Validation Error
+
+```json
+{
+    "status": "failed",
+    "message": "Validation failed",
+    "errors": {
+        "field_name": ["Error message"]
+    }
+}
+```
+### General Error
+
+```json
+{
+    "status": "failed",
+    "message": "Error message",
+    "error": "Detailed error message"
+}
+```
+
+
