@@ -24,26 +24,26 @@
 </div>
 
 
-<script>
-    getList();
+
+@push('scripts')
+    <script>
+        getList();
+        async function getList() {
+
+            let res = await axios.get("/admin/staff");
+
+            let tableList = $("#tableList");
+            let tableData = $("#datatable1");
 
 
-    async function getList() {
+            tableList.empty();
 
-        let res = await axios.get("/admin/staff");
-
-        let tableList = $("#tableList");
-        let tableData = $("#datatable1");
-
-
-        tableList.empty();
-
-        res.data.data.forEach(function(item, index) {
-            let services = '';
-            item['services'].forEach(function(service,service_index){
-                services+= `<span>${service['name']}</span>`;
-            });
-            let row = `<tr>
+            res.data.data.forEach(function(item, index) {
+                let services = '';
+                item['services'].forEach(function(service, service_index) {
+                    services += `<span>${service['name']}</span>`;
+                });
+                let row = `<tr>
                     <td>${index + 1}</td>
                     <td>${item['user']['name']}</td>
                     <td>${item['user']['email']}</td>
@@ -54,25 +54,26 @@
                         <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>
                     </td>
                  </tr>`
-            tableList.append(row)
-        })
+                tableList.append(row)
+            })
 
-        $('.editBtn').on('click', async function () {
-               let id= $(this).data('id');
-               let filePath= $(this).data('path');
-               await FillUpUpdateForm(id,filePath)
-               $("#update-modal").modal('show');
-        })
+            $('.editBtn').on('click', async function() {
+                let id = $(this).data('id');
+                let filePath = $(this).data('path');
+                await FillUpUpdateForm(id, filePath)
+                $("#update-modal").modal('show');
+            })
 
-        $('.deleteBtn').on('click',function () {
-            let id= $(this).data('id');
-            let path= $(this).data('path');
+            $('.deleteBtn').on('click', function() {
+                let id = $(this).data('id');
+                let path = $(this).data('path');
 
-            $("#delete-modal").modal('show');
-            $("#deleteID").val(id);
-            $("#deleteFilePath").val(path)
+                $("#delete-modal").modal('show');
+                $("#deleteID").val(id);
+                $("#deleteFilePath").val(path)
 
-        })
+            })
 
-    }
-</script>
+        }
+    </script>
+@endpush

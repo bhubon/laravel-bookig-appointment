@@ -15,11 +15,17 @@
 </footer>
 </div><!-- sl-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
+
 <script src="{{ asset('assets') }}/lib/jquery/jquery.js"></script>
 <script src="{{ asset('assets') }}/lib/popper.js/popper.js"></script>
 <script src="{{ asset('assets') }}/lib/bootstrap/bootstrap.js"></script>
 <script src="{{ asset('assets') }}/lib/jquery-ui/jquery-ui.js"></script>
 <script src="{{ asset('assets') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="{{ asset('assets/lib/highlightjs/highlight.pack.js') }}"></script>
+
+<!-- summernote js -->
+<script src="{{ asset('assets/lib/medium-editor/medium-editor.js') }}"></script>
+<script src="{{ asset('assets/lib/summernote/summernote-bs4.min.js') }}"></script>
 
 <script src="{{ asset('assets/lib/highlightjs/highlight.pack.js') }}"></script>
 <script src="{{ asset('assets/lib/datatables/jquery.dataTables.js') }}"></script>
@@ -61,8 +67,54 @@
 <script src="{{ asset('assets') }}/js/ResizeSensor.js"></script>
 <script src="{{ asset('assets') }}/js/dashboard.js"></script>
 
-@stack('scripts')
 
+    <script>
+      $(function(){
+        'use strict';
+
+            //summernote start
+            var editor = new MediumEditor('.editable');
+            $('.summernote').summernote({
+              height: 150,
+              tooltip: false
+            })
+           //summernote end
+
+            //summernote start
+            var editor = new MediumEditor('.editable');
+            $('.summernote1').summernote({
+              height: 150,
+              tooltip: false
+            })
+           //summernote end
+
+            //summernote start
+            var editor = new MediumEditor('.editable');
+            $('.summernote2').summernote({
+              height: 150,
+              tooltip: false
+            })
+           //summernote end
+
+            //datatable start
+            $('#datatable1').DataTable({  
+              responsive: true,
+              language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+              }
+            });
+
+            // Select2
+            $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+           //datatable end
+
+      });
+
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>

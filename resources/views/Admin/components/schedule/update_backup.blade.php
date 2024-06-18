@@ -1,27 +1,29 @@
 <!-- LARGE MODAL -->
-<div id="create-modal" class="modal fade">
+<div id="update-modal" class="modal fade">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content tx-size-sm">
       <div class="modal-header pd-x-20">
-        <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Create New</h6>
+        <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Update Schedule</h6>
         <button type="button" id="modal-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body pd-20">
-        <form id="save-form">
+        <form id="update-form">
           <div class="form-layout">
             <div class="row mg-b-25">
+
+              <input type="text" class="d-none" id="updateID">
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Date: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="date" id="date">
+                  <input class="form-control" type="date" id="update_date">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Select Staff: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose staff" id="staff_name">
+                  <select class="form-control select2" data-placeholder="Choose staff" id="update_staff_name">
                     <option value="" selected="" disabled="" >Choose one</option>
 
                   </select>
@@ -30,7 +32,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Select Service: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose service" id="service_name">
+                  <select class="form-control select2" data-placeholder="Choose service" id="update_service_name">
                     <option value="" selected="" disabled="" >Choose one</option>
 
                   </select>
@@ -178,7 +180,7 @@
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="12.40pm"><span>12.40pm</span>
+                            <input type="checkbox" name="time[]"  value="12.40pm"><span>12.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -187,17 +189,17 @@
                         <th scope="row">8</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1pm"><span>1pm</span>
+                            <input type="checkbox" name="time[]"  value="1pm"><span>1pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1.20pm"><span>1.20pm</span>
+                            <input type="checkbox" name="time[]"  value="1.20pm"><span>1.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1.40pm"><span>1.40pm</span>
+                            <input type="checkbox" name="time[]"  value="1.40pm"><span>1.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -206,17 +208,17 @@
                         <th scope="row">9</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2pm"><span>2pm</span>
+                            <input type="checkbox" name="time[]"  value="2pm"><span>2pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2.20pm"><span>2.20pm</span>
+                            <input type="checkbox" name="time[]"  value="2.20pm"><span>2.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2.40pm"><span>2.40pm</span>
+                            <input type="checkbox" name="time[]"  value="2.40pm"><span>2.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -225,17 +227,17 @@
                         <th scope="row">10</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3pm"><span>3pm</span>
+                            <input type="checkbox" name="time[]"  value="3pm"><span>3pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3.20pm"><span>3.20pm</span>
+                            <input type="checkbox" name="time[]"  value="3.20pm"><span>3.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3.40pm"><span>3.40pm</span>
+                            <input type="checkbox" name="time[]"  value="3.40pm"><span>3.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -244,17 +246,17 @@
                         <th scope="row">11</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4pm"><span>4pm</span>
+                            <input type="checkbox" name="time[]"  value="4pm"><span>4pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4.20pm"><span>4.20pm</span>
+                            <input type="checkbox" name="time[]"  value="4.20pm"><span>4.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4.40pm"><span>4.40pm</span>
+                            <input type="checkbox" name="time[]"  value="4.40pm"><span>4.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -263,17 +265,17 @@
                         <th scope="row">12</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5pm"><span>5pm</span>
+                            <input type="checkbox" name="time[]"  value="5pm"><span>5pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5.20pm"><span>5.20pm</span>
+                            <input type="checkbox" name="time[]"  value="5.20pm"><span>5.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5.40pm"><span>5.40pm</span>
+                            <input type="checkbox" name="time[]"  value="5.40pm"><span>5.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -282,17 +284,17 @@
                         <th scope="row">13</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6pm"><span>6pm</span>
+                            <input type="checkbox" name="time[]"  value="6pm"><span>6pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6.20pm"><span>6.20pm</span>
+                            <input type="checkbox" name="time[]"  value="6.20pm"><span>6.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6.40pm"><span>6.40pm</span>
+                            <input type="checkbox" name="time[]"  value="6.40pm"><span>6.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -301,17 +303,17 @@
                         <th scope="row">14</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7pm"><span>7pm</span>
+                            <input type="checkbox" name="time[]"  value="7pm"><span>7pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7.20pm"><span>7.20pm</span>
+                            <input type="checkbox" name="time[]"  value="7.20pm"><span>7.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7.40pm"><span>7.40pm</span>
+                            <input type="checkbox" name="time[]"  value="7.40pm"><span>7.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -320,17 +322,17 @@
                         <th scope="row">15</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8pm"><span>8pm</span>
+                            <input type="checkbox" name="time[]"  value="8pm"><span>8pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8.20pm"><span>8.20pm</span>
+                            <input type="checkbox" name="time[]"  value="8.20pm"><span>8.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8.40pm"><span>8.40pm</span>
+                            <input type="checkbox" name="time[]"  value="8.40pm"><span>8.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -339,17 +341,17 @@
                         <th scope="row">16</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9pm"><span>9pm</span>
+                            <input type="checkbox" name="time[]"  value="9pm"><span>9pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9.20pm"><span>9.20pm</span>
+                            <input type="checkbox" name="time[]"  value="9.20pm"><span>9.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9.40pm"><span>9.40pm</span>
+                            <input type="checkbox" name="time[]"  value="9.40pm"><span>9.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -363,73 +365,98 @@
         </form>
       </div><!-- modal-body -->
 
-      </div><!-- modal-body -->
-
       <div class="modal-footer">
-        <button onclick="Save()" id="save-btn" class="btn btn-info pd-x-20">Save changes</button>
-        <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
-        <button onclick="Save()" id="save-btn" class="btn btn-info pd-x-20">Save changes</button>
-        <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+        <button type="button" onclick="Update()" id="update-btn" class="btn btn-info pd-x-20">Update</button>
+        <button type="button" class="btn btn-secondary pd-x-20" id="update-modal-close" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
+
+
 <script>
-  FillStaffDropDown();
-  FillServiceDropDown();
-  FillServiceDropDown();
+    async function UpdateFillStaffDropDown() {
+        let res = await axios.get("/admin/staffList");
+        res.data.data.forEach(function (item, i) {
+            let option = `<option value="${item['id']}">${item['name']}</option>`;
+            $("#update_staff_name").append(option);
+        });
+    }
 
-  async function FillStaffDropDown(){
-    let res = await axios.get("/admin/staffList")
-    res.data.data.forEach(function (item,i) {
-      let option=`<option value="${item['id']}">${item['name']}</option>`
-      $("#staff_name").append(option);
-    })
-  }
+    async function UpdateFillServiceDropDown() {
+        let res = await axios.get("/admin/service");
+        res.data.data.forEach(function (item, i) {
+            let option = `<option value="${item['id']}">${item['name']}</option>`;
+            $("#update_service_name").append(option);
+        });
+    }
 
-  async function FillServiceDropDown(){
-    let res = await axios.get("/admin/service")
-    res.data.data.forEach(function (item,i) {
-      let option=`<option value="${item['id']}">${item['name']}</option>`
-      $("#service_name").append(option);
-    })
-  }
+    async function FillUpUpdateForm(id) {
+        document.getElementById('updateID').value = id;
 
-  function resetCreateForm() {
-    document.getElementById('save-form').reset();
-    document.getElementById('error-message').style.display = 'none';
-    document.getElementById('error-message').innerText = '';
-  }
+        await UpdateFillStaffDropDown();
+        await UpdateFillServiceDropDown();
 
-  // $('#create-modal').on('show.bs.modal', function (e) {
-  //   resetCreateForm();
-  // });
+        try {
+            let res = await axios.get("/admin/staff-schedule/" + id);
+            let data = res.data.data;
 
-async function Save() {
-    let staff = document.getElementById('staff_name').value;
-    let service = document.getElementById('service_name').value;
-    let date = document.getElementById('date').value;
+            // Set the date, staff, and service fields
+            document.getElementById('update_date').value = data.date;
+            document.getElementById('update_staff_name').value = data.user_id;
+            document.getElementById('update_service_name').value = data.service_id;
+
+            // Reset and populate checkboxes
+            resetCheckboxes();
+            checkTimes(data.times);
+        } catch (error) {
+            console.error('Error fetching staff schedule:', error);
+        }
+    }
+
+    function resetCheckboxes() {
+        document.querySelectorAll('input[name="time[]"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    }
+
+    function checkTimes(times) {
+        const timesSet = new Set(times.map(time => time.time));
+        document.querySelectorAll('input[name="time[]"]').forEach(checkbox => {
+            if (timesSet.has(checkbox.value)) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+
+async function Update() {
+    let staff = document.getElementById('update_staff_name').value;
+    let service = document.getElementById('update_service_name').value;
+    let date = document.getElementById('update_date').value;
+    let id = document.getElementById('updateID').value;
 
     let times = [];
     document.querySelectorAll('input[name="time[]"]:checked').forEach((checkbox) => {
         times.push(checkbox.value);
     });
 
+console.log('-------',staff);
+console.log('-------',service);
+console.log('-------',date);
+console.log('-------',id);
+
     if (staff.length === 0) {
         errorToast("Staff field is required!");
-    } 
-    else if (service.length === 0) {
+    } else if (service.length === 0) {
         errorToast("Service field is required!");
-    } 
-    else if (date.length === 0) {
+    } else if (date.length === 0) {
         errorToast("Date field is required!");
-    } 
-    else if (times.length === 0) {
-        errorToast("At least one time slot must be selected!");
-    } 
-    else {
-        let formData = new FormData();
+    } else if (times.length === 0) {
+        errorToast("At least one time slot must be selected!");  // Ensure this line is correctly reached
+    } else {
+        let formData=new FormData();
         formData.append('user_id', staff);
         formData.append('service_id', service);
         formData.append('date', date);
@@ -437,6 +464,7 @@ async function Save() {
             formData.append(`time[${index}]`, time);
         });
 
+console.log('-------',formData);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -444,10 +472,10 @@ async function Save() {
         };
 
         try {
-            let res = await axios.post("/admin/staff-schedule", formData, config);
-            if (res.status === 201) {
+            let res = await axios.put(`/admin/staff-schedule/${id}`, formData, config);
+            if (res.status === 200) {
                 successToast(res.data.message || 'Request completed');
-                resetCreateForm(); 
+                document.getElementById('update-form').reset();
                 await getList();
                 document.getElementById('modal-close').click();
             } else {
@@ -466,6 +494,8 @@ async function Save() {
                         }
                     }
                 }
+            } else if (error.response && error.response.status === 404) {
+                errorToast(error.response.data.message || "Resource not found");
             } else if (error.response && error.response.status === 500) {
                 errorToast(error.response.data.error);
             } else {
@@ -478,5 +508,3 @@ async function Save() {
 
 
 </script>
-
-
