@@ -21,7 +21,7 @@
         let id = document.getElementById('deleteID').value;
         
         try {
-            let res = await axios.delete("/admin/staff-schedule/" + id);
+            let res = await axios.delete("/admin/customer-appointment/" + id);
             
             if (res.status === 200) {
                 successToast(res.data.message || 'Delete success');

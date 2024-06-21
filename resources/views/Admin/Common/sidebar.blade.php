@@ -98,6 +98,13 @@
                 </div>
             </a>
 
+            <a href="{{url('/admin/appointmentPage')}}" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="icon ion-ios-person-outline tx-22"></i>
+                    <span class="menu-item-label">Appointment List</span>
+                </div>
+            </a>
+
             <a href="{{route('admin.logout')}}" class="sl-menu-link">
               <div class="sl-menu-item">
                 <i class="menu-item-icon icon ion-power tx-22"></i>

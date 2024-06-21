@@ -23,7 +23,7 @@
                                     <label class="form-control-label">Select Staff: <span class="tx-danger">*</span></label>
                                     <select class="form-control select2" id="update_staff_name">
                                         <option value="" selected disabled>Choose one</option>
-                                        
+                                        <!-- Populate dynamically -->
                                     </select>
                                 </div>
                             </div>

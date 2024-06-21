@@ -16,8 +16,8 @@ class Appointment extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function staff(){
-        return $this->belongsTo(Staff::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function service(){

@@ -368,12 +368,16 @@
   </div>
 </div>
 
+
+
+
 <script>
   FillStaffDropDown();
   FillServiceDropDown();
 
+
   async function FillStaffDropDown() {
-    let res = await axios.get("/admin/staffList")
+    let res = await axios.get("/get-staff-list")
     res.data.data.forEach(function (item, i) {
       let option = `<option value="${item['id']}">${item['name']}</option>`
       $("#staff_name").append(option);
@@ -388,83 +392,90 @@
     })
   }
 
-function resetCreateForm() {
-  document.getElementById('save-form').reset();
-}
+  function resetCreateForm() {
+    document.getElementById('save-form').reset();
+  }
 
-$('#create-modal').on('show.bs.modal', function (e) {
-  resetCreateForm();
-});
+  $('#create-modal').on('show.bs.modal', function (e) {
+    resetCreateForm();
+    setMinDate()
+  });
 
-async function Save() {
+  async function Save() {
     let staff = document.getElementById('staff_name').value;
     let service = document.getElementById('service_name').value;
     let date = document.getElementById('date').value;
 
     let times = [];
     document.querySelectorAll('input[name="time[]"]:checked').forEach((checkbox) => {
-        times.push(checkbox.value);
+      times.push(checkbox.value);
     });
 
     if (staff.length === 0) {
-        errorToast("Staff field is required!");
+      errorToast("Staff field is required!");
     } else if (service.length === 0) {
-        errorToast("Service field is required!");
+      errorToast("Service field is required!");
     } else if (date.length === 0) {
-        errorToast("Date field is required!");
+      errorToast("Date field is required!");
     } else if (times.length === 0) {
-        errorToast("At least one time slot must be selected!");
+      errorToast("At least one time slot must be selected!");
     } else {
 
-        let formData = new FormData();
-        formData.append('user_id', staff);
-        formData.append('service_id', service);
-        formData.append('date', date);
-        times.forEach((time, index) => {
-            formData.append(`time[${index}]`, time);
-        });
+      let formData = new FormData();
+      formData.append('user_id', staff);
+      formData.append('service_id', service);
+      formData.append('date', date);
+      times.forEach((time, index) => {
+        formData.append(`time[${index}]`, time);
+      });
 
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data',
-            },
-        };
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
 
-        try {
-            let res = await axios.post("/admin/staff-schedule", formData, config);
-            if (res.status === 201) {
-                successToast(res.data.message || 'Request success');
-                resetCreateForm();
-                $('#create-modal').modal('hide');
-                await getList(); 
-            } else {
-                errorToast(res.data.message || "Request failed");
-            }
-        } catch (error) {
-            if (error.response) {
-                if (error.response.status === 422) {
-                    if (error.response.data.message) {
-                        errorToast(error.response.data.message);
-                    }
-                    if (error.response.data.errors) {
-                        let errorMessages = error.response.data.errors;
-                        for (let field in errorMessages) {
-                            if (errorMessages.hasOwnProperty(field)) {
-                                errorMessages[field].forEach(msg => errorToast(msg));
-                            }
-                        }
-                    }
-                } else if (error.response.status === 500) {
-                    errorToast(error.response.data.error);
-                } else {
-                    errorToast("Request failed!");
-                }
-            } else {
-                errorToast("Request failed!");
-            }
-            console.error(error);
+      try {
+        let res = await axios.post("/admin/staff-schedule", formData, config);
+        if (res.status === 201) {
+          successToast(res.data.message || 'Request success');
+          resetCreateForm();
+          $('#create-modal').modal('hide');
+          await getList(); 
+        } else {
+          errorToast(res.data.message || "Request failed");
         }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 422) {
+            if (error.response.data.message) {
+              errorToast(error.response.data.message);
+            }
+            if (error.response.data.errors) {
+              let errorMessages = error.response.data.errors;
+              for (let field in errorMessages) {
+                if (errorMessages.hasOwnProperty(field)) {
+                  errorMessages[field].forEach(msg => errorToast(msg));
+                }
+              }
+            }
+          } else if (error.response.status === 500) {
+            errorToast(error.response.data.error);
+          } else {
+            errorToast("Request failed!");
+          }
+        } else {
+          errorToast("Request failed!");
+        }
+        console.error(error);
+      }
     }
-}
+  }
+
+  function setMinDate() {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  }
 
 </script>
