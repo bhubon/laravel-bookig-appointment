@@ -32,17 +32,14 @@
             }
         } catch (error) {
             if (error.response) {
-                // Server responded with a status other than 200 range
                 if (error.response.status === 404) {
                     errorToast("Schedule not found!");
                 } else {
                     errorToast(error.response.data.message || "Request failed!");
                 }
             } else if (error.request) {
-                // Request was made but no response was received
                 errorToast("No response from server. Request failed!");
             } else {
-                // Something else happened in making the request
                 errorToast("Error: " + error.message);
             }
         }
