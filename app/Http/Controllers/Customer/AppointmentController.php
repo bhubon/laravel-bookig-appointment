@@ -62,7 +62,7 @@ class AppointmentController extends Controller
         $date = $request->input('appointment_date');
         $time = $request->input('appointment_time');
 
-        $check = Appointment::where('customer_id', $customer_id)->where('staff_id', $staff_id)
+        $check = Appointment::where('customer_id', $customer_id)->where('user_id', $staff_id)
             ->where('appointment_date', $date)
             ->exists();
 
@@ -70,15 +70,6 @@ class AppointmentController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'You have already booked an appointment. Please wait to make next appointment.'
-            ], 200);
-        }
-
-        $checkSchedule = Appointment::where('staff_id', $staff_id)->where('appointment_date', $date)->where('appointment_time', $time)->exists();
-
-        if ($checkSchedule) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Schedule not available for this date and time.'
             ], 200);
         }
 
@@ -92,7 +83,7 @@ class AppointmentController extends Controller
         ]);
 
         if ($appointment) {
-            $schedule_id = Schedule::where('staff_id', $staff_id)->where('date', $date)->pluck('id')->first();
+            $schedule_id = Schedule::where('user_id', $staff_id)->where('date', $date)->pluck('id')->first();
 
             Time::where('schedule_id', $schedule_id)
                 ->where('time', $time)

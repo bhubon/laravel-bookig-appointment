@@ -1,25 +1,25 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Staff\ScheduleController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\StaffController;
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\UserController;
+
+use App\Http\Middleware\TokenVerificationMiddleware;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\StaffScheduleController;
-
 use App\Http\Controllers\Customer\AppointmentController;
-use App\Http\Controllers\Staff\ScheduleController;
-use App\Http\Middleware\TokenVerificationMiddleware;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CustomerAppointmentController;
 
-// Public Routes
-Route::get('/', function () {
-        return view('welcome');
-});
+
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -41,7 +41,16 @@ Route::prefix('admin')->group(function () {
                 Route::get('/servicePage', [ServiceController::class, 'servicePage']);
                 Route::resource('service', ServiceController::class);
                 Route::post('/update-service', [ServiceController::class, 'updateService']);
+                Route::get('/servicePage', [ServiceController::class, 'servicePage']);
+                Route::resource('service', ServiceController::class);
+                Route::post('/update-service', [ServiceController::class, 'updateService']);
 
+                Route::get('/schedulePage', [StaffScheduleController::class, 'schedulePage']);
+                Route::resource('staff-schedule', StaffScheduleController::class);
+                //Route::post('/update-schedule',[StaffScheduleController::class,'updateSchedule']);
+
+                Route::get('/appointmentPage', [CustomerAppointmentController::class, 'appointmentPage']);
+                Route::resource('/customer-appointment', CustomerAppointmentController::class);
                 Route::resource('staff-schedule', StaffScheduleController::class);
                 Route::get('/schedulePage', [StaffScheduleController::class, 'schedulePage']);
                 Route::get('/staffList', [StaffScheduleController::class, 'staffList']);
@@ -70,6 +79,13 @@ Route::prefix('admin')->group(function () {
         });
 });
 
+// Listing Routes
+Route::get('/get-staff-list', [ListingController::class, 'getStaffList']);
+Route::get('/get-staff-by-date', [ListingController::class, 'getStaffByDate']);
+Route::get('/get-schedule-time', [ListingController::class, 'getScheduleTime']);
+Route::get('/get-customer-list', [ListingController::class, 'getCustomerList']);
+Route::get('/get-update-schedule-time', [ListingController::class, 'getUpdateScheduleTime']);
+
 // Staff Routes
 Route::prefix('staff')->middleware([TokenVerificationMiddleware::class])->group(function () {
         Route::resource('schedule', ScheduleController::class);
@@ -79,3 +95,9 @@ Route::prefix('staff')->middleware([TokenVerificationMiddleware::class])->group(
 Route::prefix('customer')->middleware([TokenVerificationMiddleware::class])->group(function () {
         Route::resource('appointment', AppointmentController::class);
 });
+
+//Front Area
+
+// Public Routes
+Route::get('/', [HomeController::class, 'home'])->name('frontend.home');
+Route::get('/appointment', [HomeController::class, 'appointment_page'])->name('frontend.appointment');
