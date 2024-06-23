@@ -23,7 +23,6 @@
                                     <label class="form-control-label">Select Staff: <span class="tx-danger">*</span></label>
                                     <select class="form-control select2" id="update_staff_name">
                                         <option value="" selected disabled>Choose one</option>
-                                        
                                     </select>
                                 </div>
                             </div>
@@ -32,7 +31,6 @@
                                     <label class="form-control-label">Select Service: <span class="tx-danger">*</span></label>
                                     <select class="form-control select2" id="update_service_name">
                                         <option value="" selected disabled>Choose one</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -55,7 +53,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div><!-- row -->
                     </div><!-- Form Layout -->
@@ -69,7 +66,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     async function FillUpUpdateForm(id) {
@@ -87,7 +83,6 @@
             document.getElementById('update_service_name').value = data.service_id;
 
             populateTimesCheckboxes(data.times);
-
             setMinDateForUpdate(data.date);
         } catch (error) {
             console.error('Error fetching staff schedule:', error);
@@ -101,8 +96,8 @@
         amCheckboxesContainer.innerHTML = '';
         pmCheckboxesContainer.innerHTML = '';
 
-        let amTimes = ['6am', '6.20am', '6.40am', '7am', '7.20am', '7.40am', '8am', '8.20am', '9.40am', '10am', '10.20am', '10.40am', '11am', '11.20am', '11.40am', '12pm'];
-        let pmTimes = ['12.20pm', '12.40pm', '1pm', '1.20pm', '1.40pm', '2pm', '2.20pm', '2.40pm', '3pm', '3.20pm', '3.40pm', '4pm', '4.20pm', '4.40pm', '5pm', '5.20pm', '5.40pm', '6pm', '6.20pm', '7.40pm', '8pm', '8.20pm', '8.40pm', '9pm', '9.20pm', '9.40pm'];
+        let amTimes = ['6am', '6.20am', '6.40am', '7am', '7.20am', '7.40am', '8am', '8.20am', '9am', '9.20am','9.40am', '10am', '10.20am', '10.40am', '11am', '11.20am', '11.40am'];
+        let pmTimes = ['12pm', '12.20pm', '12.40pm', '1pm', '1.20pm', '1.40pm', '2pm', '2.20pm', '2.40pm', '3pm', '3.20pm', '3.40pm', '4pm', '4.20pm', '4.40pm', '5pm', '5.20pm', '5.40pm', '6pm', '6.20pm', '7.40pm', '8pm', '8.20pm', '8.40pm', '9pm', '9.20pm', '9.40pm'];
 
         amTimes.forEach(time => {
             createCheckbox(time, amCheckboxesContainer, times);
@@ -134,7 +129,6 @@
 
         container.appendChild(div);
     }
-
 
     async function UpdateFillStaffDropDown() {
         let res = await axios.get("/get-staff-list");
@@ -195,7 +189,7 @@
 
                 if (res.status === 200) {
                     successToast(res.data.message || 'Update Success');
-                    document.getElementById('update-form').reset();
+                    resetUpdateForm();
                     $('#update-modal').modal('hide');
                     await getList(); 
                 } else {
@@ -226,7 +220,6 @@
         }
     }
 
-
     function setMinDateForUpdate(selectedDate = null) {
         const dateInput = document.getElementById('update_date');
         const today = new Date().toISOString().split('T')[0];
@@ -247,8 +240,12 @@
     }
 
     $('#update-modal').on('shown.bs.modal', function() {
+        resetUpdateForm();
         const selectedDate = document.getElementById('update_date').value;
         setMinDateForUpdate(selectedDate);
     });
-</script>
 
+  function resetUpdateForm() {
+    document.getElementById('update-form').reset();
+  }
+</script>

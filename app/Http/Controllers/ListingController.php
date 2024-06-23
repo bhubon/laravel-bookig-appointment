@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Exception;
 use App\Models\User;
+use App\Models\Customer;
 use App\Models\Appointment;
 use App\Models\Schedule;
 use App\Models\Time;
@@ -142,7 +143,7 @@ class ListingController extends Controller
     public function getCustomerList()
     {
         try {
-            $users = User::where('role', 'customer')->get();
+            $users = Customer::with('user')->get();
             if ($users->isEmpty()) {
                 return response()->json([
                     'status' => 'success',

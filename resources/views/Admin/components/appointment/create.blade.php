@@ -80,7 +80,7 @@
           errorToast('No customer found');
         } else {
           res.data.data.forEach(function (item, i) {
-            let option = `<option value="${item['id']}">${item['name']}</option>`;
+            let option = `<option value="${item['id']}">${item['user']['name']}</option>`;
             $("#customer_name").append(option);
           });
         }
@@ -225,9 +225,17 @@
     $('#choose-pm-time').hide();
   }
 
-  $('#create-modal').on('hide.bs.modal', function (e) {
+  $('#create-modal').on('show.bs.modal', function (e) {
     resetCreateForm();
+    setMinDate();
   });
+
+  function setMinDate() {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  }
+
 
   async function Save() {
     let date = document.getElementById('date').value;

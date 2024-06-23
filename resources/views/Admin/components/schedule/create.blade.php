@@ -175,7 +175,7 @@
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="12.40pm"><span>12.40pm</span>
+                            <input type="checkbox" name="time[]"  value="12.40pm"><span>12.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -184,17 +184,17 @@
                         <th scope="row">8</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1pm"><span>1pm</span>
+                            <input type="checkbox" name="time[]"  value="1pm"><span>1pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1.20pm"><span>1.20pm</span>
+                            <input type="checkbox" name="time[]"  value="1.20pm"><span>1.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="1.40pm"><span>1.40pm</span>
+                            <input type="checkbox" name="time[]"  value="1.40pm"><span>1.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -203,17 +203,17 @@
                         <th scope="row">9</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2pm"><span>2pm</span>
+                            <input type="checkbox" name="time[]"  value="2pm"><span>2pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2.20pm"><span>2.20pm</span>
+                            <input type="checkbox" name="time[]"  value="2.20pm"><span>2.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="2.40pm"><span>2.40pm</span>
+                            <input type="checkbox" name="time[]"  value="2.40pm"><span>2.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -222,17 +222,17 @@
                         <th scope="row">10</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3pm"><span>3pm</span>
+                            <input type="checkbox" name="time[]"  value="3pm"><span>3pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3.20pm"><span>3.20pm</span>
+                            <input type="checkbox" name="time[]"  value="3.20pm"><span>3.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="3.40pm"><span>3.40pm</span>
+                            <input type="checkbox" name="time[]"  value="3.40pm"><span>3.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -241,17 +241,17 @@
                         <th scope="row">11</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4pm"><span>4pm</span>
+                            <input type="checkbox" name="time[]"  value="4pm"><span>4pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4.20pm"><span>4.20pm</span>
+                            <input type="checkbox" name="time[]"  value="4.20pm"><span>4.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="4.40pm"><span>4.40pm</span>
+                            <input type="checkbox" name="time[]"  value="4.40pm"><span>4.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -260,17 +260,17 @@
                         <th scope="row">12</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5pm"><span>5pm</span>
+                            <input type="checkbox" name="time[]"  value="5pm"><span>5pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5.20pm"><span>5.20pm</span>
+                            <input type="checkbox" name="time[]"  value="5.20pm"><span>5.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="5.40pm"><span>5.40pm</span>
+                            <input type="checkbox" name="time[]"  value="5.40pm"><span>5.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -279,17 +279,17 @@
                         <th scope="row">13</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6pm"><span>6pm</span>
+                            <input type="checkbox" name="time[]"  value="6pm"><span>6pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6.20pm"><span>6.20pm</span>
+                            <input type="checkbox" name="time[]"  value="6.20pm"><span>6.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="6.40pm"><span>6.40pm</span>
+                            <input type="checkbox" name="time[]"  value="6.40pm"><span>6.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -298,17 +298,17 @@
                         <th scope="row">14</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7pm"><span>7pm</span>
+                            <input type="checkbox" name="time[]"  value="7pm"><span>7pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7.20pm"><span>7.20pm</span>
+                            <input type="checkbox" name="time[]"  value="7.20pm"><span>7.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="7.40pm"><span>7.40pm</span>
+                            <input type="checkbox" name="time[]"  value="7.40pm"><span>7.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -317,17 +317,17 @@
                         <th scope="row">15</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8pm"><span>8pm</span>
+                            <input type="checkbox" name="time[]"  value="8pm"><span>8pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8.20pm"><span>8.20pm</span>
+                            <input type="checkbox" name="time[]"  value="8.20pm"><span>8.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="8.40pm"><span>8.40pm</span>
+                            <input type="checkbox" name="time[]"  value="8.40pm"><span>8.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -336,17 +336,17 @@
                         <th scope="row">16</th>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9pm"><span>9pm</span>
+                            <input type="checkbox" name="time[]"  value="9pm"><span>9pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9.20pm"><span>9.20pm</span>
+                            <input type="checkbox" name="time[]"  value="9.20pm"><span>9.20pm</span>
                           </label>
                         </td>
                         <td>
                           <label class="ckbox">
-                            <input type="checkbox" npme="time[]"  value="9.40pm"><span>9.40pm</span>
+                            <input type="checkbox" name="time[]"  value="9.40pm"><span>9.40pm</span>
                           </label>
                         </td>
                       </tr>
@@ -361,7 +361,7 @@
       </div><!-- modal-body -->
 
       <div class="modal-footer">
-        <button onclick="Save()" id="save-btn" class="btn btn-info pd-x-20">Save changes</button>
+        <button  type="button" onclick="Save()" id="save-btn" class="btn btn-info pd-x-20">Save changes</button>
         <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -441,7 +441,7 @@
           successToast(res.data.message || 'Request success');
           resetCreateForm();
           $('#create-modal').modal('hide');
-          await getList(); 
+          await getList();
         } else {
           errorToast(res.data.message || "Request failed");
         }

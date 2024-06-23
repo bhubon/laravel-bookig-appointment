@@ -84,14 +84,14 @@
             </a>
 
 
-            <a href="{{url("/admin/servicePage")}}" class="sl-menu-link">
+            <a href="{{url('/admin/servicePage')}}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>
                     <span class="menu-item-label">Service List</span>
                 </div>
             </a>
 
-            <a href="{{url("/admin/schedulePage")}}" class="sl-menu-link">
+            <a href="{{url('/admin/schedulePage')}}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>
                     <span class="menu-item-label">Schedule List</span>

@@ -24,11 +24,7 @@ class CustomerAppointmentController extends Controller
     public function index()
     {
         try {
-            $appointments = Appointment::with(['user','customer','customer.user','service'])
-            ->whereHas('user', function($query) {
-                $query->where('role','staff');
-            })
-            ->get();
+            $appointments = Appointment::with(['user','customer','customer.user','service'])->get();
 
             return response()->json([
                 'status' => 'success',

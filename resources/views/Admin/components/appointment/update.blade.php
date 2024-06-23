@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content tx-size-sm">
             <div class="modal-header pd-x-20">
-                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Update Schedule</h6>
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Update Appointment</h6>
                 <button type="button" id="modal-close" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -82,6 +82,7 @@
             await UpdateFillServiceDropDown(formData.service_id);
             await UpdateFillCustomerDropDown(formData.customer_id);
             await getScheduleTimeAndUpdate(formData.user_id, date, formData.appointment_time);
+            setMinDateForUpdate(formData.appointment_date);
         } catch (error) {
             console.error(error);
             errorToast("Failed to fetch appointment details.");
@@ -112,7 +113,6 @@
     async function getScheduleTimeAndUpdate(staffId, date, selectedTime) {
         try {
             let response = await axios.get("/get-update-schedule-time", { params: { staff_id: staffId, date: date } });
-            console.log('Response:', response);
 
             let amContainer = $('#am-time-container');
             let pmContainer = $('#pm-time-container');
@@ -184,7 +184,7 @@
                 errorToast("No customer found");
             } else if (res.data.status === 'success') {
                 res.data.data.forEach(item => {
-                    let option = `<option value="${item.id}" ${item.id == selectedCustomerId ? 'selected' : ''}>${item.name}</option>`;
+                    let option = `<option value="${item.id}" ${item.id == selectedCustomerId ? 'selected' : ''}>${item.user.name}</option>`;
                     select.append(option);
                 });
             } else {
@@ -288,15 +288,35 @@
         }
     }
 
+
+    function setMinDateForUpdate(selectedDate = null) {
+        const dateInput = document.getElementById('update_date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+
+        if (selectedDate) {
+            const selectedDateObj = new Date(selectedDate);
+            const selectedDateStr = selectedDateObj.toISOString().split('T')[0];
+
+            if (selectedDateStr < today) {
+                const option = document.createElement('option');
+                option.value = selectedDateStr;
+                option.textContent = selectedDateStr;
+                option.selected = true;
+                dateInput.appendChild(option);
+            }
+        }
+    }
+
+
+    $('#update-modal').on('shown.bs.modal', function() {
+        resetUpdateForm();
+        const selectedDate = document.getElementById('update_date').value;
+        setMinDateForUpdate(selectedDate);
+    });
+
     function resetUpdateForm() {
         document.getElementById('update-form').reset();
-        $('#update_staff_name').val(null).trigger('change');
-        $('#update_service_name').val(null).trigger('change');
-        $('#update_customer_name').val(null).trigger('change');
-        $('#choose-am-time').hide();
-        $('#choose-pm-time').hide();
-        $('#am-time-container').empty();
-        $('#pm-time-container').empty();
     }
 
 </script>
