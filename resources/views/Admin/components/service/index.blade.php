@@ -22,7 +22,7 @@
   </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         getList();
@@ -51,20 +51,19 @@ async function getList() {
                         <button data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-success">Edit</button>
                         <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>
                     </td>
-                 </tr>`
-        tableList.append(row)
-    })
+                 </tr>`;
+        tableList.append(row);
+    });
+
 
     $('.editBtn').on('click', async function () {
            let id= $(this).data('id');
-           //console.log("Edit button clicked, ID:", id); // Debug log
            await FillUpUpdateForm(id);
            $("#update-modal").modal('show');
     });
 
     $('.deleteBtn').on('click',function () {
         let id= $(this).data('id');
-
         $("#delete-modal").modal('show');
         $("#deleteID").val(id);
 

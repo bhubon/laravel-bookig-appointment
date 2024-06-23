@@ -1,3 +1,4 @@
+
 <div class="card pd-20 pd-sm-40">
     <h6 class="card-body-title">Staff Schedule Information</h6>
     <div><a href="" class="btn btn-info mg-b-10 float-right" data-toggle="modal" data-target="#create-modal"><i class="fa fa-plus"></i> Add New</a></div>
@@ -20,7 +21,7 @@
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         getList();
