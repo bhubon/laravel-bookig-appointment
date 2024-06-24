@@ -176,6 +176,9 @@
       } else if (times.length === 0) {
           errorToast("At least one time slot must be selected!");
       } else {
+
+        showLoader();
+
           let payload = {
               user_id: staff,
               service_id: service,
@@ -223,6 +226,8 @@
               }
               console.error(error);
           }
+
+          hideLoader();
       }
   }
 

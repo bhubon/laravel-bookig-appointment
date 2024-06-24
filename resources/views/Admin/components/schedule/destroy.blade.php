@@ -18,6 +18,9 @@
 
 <script>
     async function itemDelete(){
+
+        showLoader();
+
         let id = document.getElementById('deleteID').value;
         
         try {
@@ -43,5 +46,7 @@
                 errorToast("Error: " + error.message);
             }
         }
+
+        hideLoader();
     }
 </script>

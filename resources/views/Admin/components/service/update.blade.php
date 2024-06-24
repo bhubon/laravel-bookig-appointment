@@ -90,6 +90,9 @@
             errorToast("Description Required !");
         } 
         else {
+
+            showLoader();
+
             let formData = new FormData();
             formData.append('name', name);
             formData.append('duration', duration);
@@ -136,6 +139,8 @@
                 }
                 console.error(error);
             }
+
+            hideLoader();
         }
     }
 
