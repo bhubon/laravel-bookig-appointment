@@ -37,29 +37,31 @@
     <link href="{{ asset('assets') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="{{ asset('assets/lib/highlightjs/github.css') }}" rel="stylesheet">
     <link href="{{ asset('assets') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
-    <link href="{{asset('assets/css/toastify.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/toastify.min.css') }}" rel="stylesheet" />
 
     <!-- summernote css -->
     <link href="{{ asset('assets/lib/medium-editor/medium-editor.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/lib/medium-editor/default.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
 
-  <!-- Datatable css -->
-  <link href="{{ asset('assets/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/lib/select2/css/select2.min.css') }}" rel="stylesheet">
-   <link href="{{ asset('assets') }}/lib/spectrum/spectrum.css" rel="stylesheet">
+    <!-- Datatable css -->
+    <link href="{{ asset('assets/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets') }}/lib/spectrum/spectrum.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/starlight.css">
-    <script src="{{asset('assets/js/toastify-js.js')}}"></script>
-    <script src="{{asset('assets/js/axios.min.js')}}"></script>
-    <script src="{{asset('assets/js/config.js')}}"></script>
+    <script src="{{ asset('assets/js/toastify-js.js') }}"></script>
+    <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('assets') }}/lib/jquery/jquery.js"></script>
 
 
 </head>
 
 <body>
-    
+
     <div id="loader" class="d-none"></div>
 
     <!-- ########## START: LEFT PANEL ########## -->
@@ -82,14 +84,14 @@
             </a>
 
 
-            <a href="{{url("/admin/servicePage")}}" class="sl-menu-link">
+            <a href="{{ url('/admin/servicePage') }}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>
                     <span class="menu-item-label">Service List</span>
                 </div>
             </a>
 
-            <a href="{{url("/admin/schedulePage")}}" class="sl-menu-link">
+            <a href="{{ url('/admin/schedulePage') }}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>
                     <span class="menu-item-label">Schedule List</span>
@@ -110,18 +112,18 @@
                 </div>
             </a>
 
-            <a href="{{url('/admin/appointmentPage')}}" class="sl-menu-link">
+            <a href="{{ url('/admin/appointmentPage') }}" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="icon ion-ios-person-outline tx-22"></i>
                     <span class="menu-item-label">Appointment List</span>
                 </div>
             </a>
 
-            <a href="{{route('admin.logout')}}" class="sl-menu-link">
-              <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-power tx-22"></i>
-                <span class="menu-item-label">Logout</span>
-              </div>
+            <a href="{{ route('admin.logout') }}" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-power tx-22"></i>
+                    <span class="menu-item-label">Logout</span>
+                </div>
             </a>
 
         </div>

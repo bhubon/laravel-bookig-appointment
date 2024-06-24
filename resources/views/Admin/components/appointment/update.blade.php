@@ -237,6 +237,9 @@
             errorToast("A time slot must be selected!");
         } else {
 
+            showLoader();
+
+
             let payload = {
                 date: date,
                 user_id: staff,
@@ -285,6 +288,8 @@
                 }
                 console.error(error);
             }
+
+            hideLoader();
         }
     }
 

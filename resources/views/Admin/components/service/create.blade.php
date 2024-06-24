@@ -86,6 +86,9 @@ async function Save() {
     } 
     else {
 
+      showLoader();
+
+
         let formData = new FormData();
         formData.append('name', name);
         formData.append('duration', duration);
@@ -132,6 +135,8 @@ async function Save() {
             }
             console.error(error);
         }
+
+        hideLoader();
     }
 }
 

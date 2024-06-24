@@ -421,6 +421,9 @@
       errorToast("At least one time slot must be selected!");
     } else {
 
+      showLoader();
+
+
       let formData = new FormData();
       formData.append('user_id', staff);
       formData.append('service_id', service);
@@ -469,6 +472,8 @@
         }
         console.error(error);
       }
+
+      hideLoader();
     }
   }
 

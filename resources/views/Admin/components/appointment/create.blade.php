@@ -252,6 +252,9 @@
       errorToast("A time slot must be selected!"); 
     }
     else {
+
+      showLoader();
+
       let formData = new FormData();
       formData.append('date', date);
       formData.append('user_id', staff);
@@ -299,6 +302,8 @@
         }
         console.error(error);
       }
+
+      hideLoader();
     }
   }
 </script>
