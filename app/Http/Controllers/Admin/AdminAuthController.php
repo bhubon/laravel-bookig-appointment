@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Mail;
 use App\Helper\JWTToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPassword;
 
 
 class AdminAuthController extends Controller 
