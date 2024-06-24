@@ -11,6 +11,11 @@ use App\Mail\ResetPassword;
 
 class AdminAuthControlle extends Controller
 {
+
+    public function admin_login_view() {
+        return view("Admin.Auth.login");
+    }
+
     public function admin_login(Request $request) {
         $request->validate([
             'email' => 'required|email',
@@ -30,7 +35,7 @@ class AdminAuthControlle extends Controller
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Unauthorized',
-            ], 401);
+            ], 200);
         }
     }
 
