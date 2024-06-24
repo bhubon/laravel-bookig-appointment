@@ -54,10 +54,6 @@
     <script src="{{asset('assets/js/toastify-js.js')}}"></script>
     <script src="{{asset('assets/js/axios.min.js')}}"></script>
     <script src="{{asset('assets/js/config.js')}}"></script>
-    <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 </head>
