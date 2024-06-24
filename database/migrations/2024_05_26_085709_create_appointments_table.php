@@ -12,9 +12,9 @@ return new class extends Migration {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('staff_id')->constrained('staff')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamp('appointment_time');
+            $table->string('appointment_time');
             $table->float('amount')->default(0);
             $table->enum('status', ['pending', 'confirmed', 'completed', 'canceled'])->default('pending');
             $table->timestamps();
@@ -28,3 +28,5 @@ return new class extends Migration {
         Schema::dropIfExists('appointments');
     }
 };
+
+

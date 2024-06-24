@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class StaffController extends Controller {
@@ -13,7 +14,7 @@ class StaffController extends Controller {
      */
     public function index() {
         try {
-            $staff = Staff::with('user')->paginate(10);
+            $staff = Staff::with(['user:id,email,name', 'services:id,name'])->latest('id')->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $staff,
@@ -27,6 +28,10 @@ class StaffController extends Controller {
         }
     }
 
+    public function staff_index() {
+        return view('Admin.Pages.staff');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -38,6 +43,9 @@ class StaffController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
+
+        // dd($request->all());
+
         try {
             $validated = $request->validate([
                 'user_id' => 'required|exists:users,id',
@@ -46,14 +54,29 @@ class StaffController extends Controller {
                 'info' => 'required|string',
             ]);
 
-            $staff = Staff::create($validated);
+            $user = User::with(['staff','staff.services'])->findOrFail($request->user_id);
 
-            $staff->services()->sync($request->input('services', []));
+            if ($user->role == 'staff' && $user->staff->services->count() > 0) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'User already in staff list',
+                ]);
+            } else {
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Staff created successfully',
-            ]);
+
+                $user->role = 'staff';
+                $user->save();
+
+
+                $staff = Staff::create($validated);
+
+                $staff->services()->sync($request->input('services', []));
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Staff created successfully',
+                ]);
+            }
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'failed',
@@ -74,7 +97,7 @@ class StaffController extends Controller {
      */
     public function show(string $id) {
         try {
-            $staff = Staff::with(['user:id,email', 'services:name,id'])->findOrFail($id);
+            $staff = Staff::with(['user:id,email,name', 'services:name,id'])->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'data' => $staff,

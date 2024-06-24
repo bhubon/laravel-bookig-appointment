@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')->constrained('staff')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete()->cascadeOnUpdate();
             $table->time('time');
             $table->date('date');
@@ -29,3 +29,5 @@ return new class extends Migration
         Schema::dropIfExists('schedule');
     }
 };
+
+

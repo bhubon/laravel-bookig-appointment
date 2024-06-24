@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\Time;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

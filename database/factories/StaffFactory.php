@@ -16,7 +16,7 @@ class StaffFactory extends Factory {
      */
     public function definition(): array {
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::where('role', 'staff')->inRandomOrder()->first()->id,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
         ];

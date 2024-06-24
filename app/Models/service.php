@@ -9,6 +9,8 @@ class Service extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','description','duration','price'];
+
     public function staff(){
         return $this->belongsToMany(Staff::class,'staff_services');
     }
