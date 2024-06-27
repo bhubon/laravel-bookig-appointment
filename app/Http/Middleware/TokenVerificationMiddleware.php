@@ -13,13 +13,17 @@ class TokenVerificationMiddleware {
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response {
-
-        $token = $request->cookie("token");
+    public function handle(Request $request, Closure $next): Response 
+    {
+        $token = $request->cookie('token');
         $result = JWTToken::verify_token($token);
 
-        if ($result == 'unauthorized') {
-            return redirect('/admin/login');
+        if ($result === 'unauthorized') {
+            if ($request->routeIs('frontend.appointment')) {
+                return redirect('/login')->with('message', 'Need to login to get an appointment');
+            } else {
+                return redirect('/admin/login');
+            }
         } else {
             $request->headers->set('email', $result->user_email);
             $request->headers->set('id', $result->user_id);

@@ -42,7 +42,7 @@ class ListingController extends Controller
             if ($staff->isEmpty()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'No staff found for the selected date.',
+                    'message' => 'No Doctor found for the selected date.',
                     'data' => []
                 ], 200);
             }

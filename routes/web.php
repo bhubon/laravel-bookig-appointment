@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Staff\ScheduleController;
 use App\Http\Controllers\Admin\AdminAuthController;
@@ -16,9 +15,13 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\StaffScheduleController;
-use App\Http\Controllers\Customer\AppointmentController;
+//use App\Http\Controllers\Customer\AppointmentController;
 use App\Http\Controllers\Admin\CustomerAppointmentController;
 
+//Frontend
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CustomerAuthControlle;
+use App\Http\Controllers\Frontend\AppointmentController;
 
 
 // Admin Routes
@@ -47,7 +50,6 @@ Route::prefix('admin')->group(function () {
 
                 Route::get('/schedulePage', [StaffScheduleController::class, 'schedulePage']);
                 Route::resource('staff-schedule', StaffScheduleController::class);
-                //Route::post('/update-schedule',[StaffScheduleController::class,'updateSchedule']);
 
                 Route::get('/appointmentPage', [CustomerAppointmentController::class, 'appointmentPage']);
                 Route::resource('/customer-appointment', CustomerAppointmentController::class);
@@ -92,12 +94,24 @@ Route::prefix('staff')->middleware([TokenVerificationMiddleware::class])->group(
 });
 
 // Customer Routes
-Route::prefix('customer')->middleware([TokenVerificationMiddleware::class])->group(function () {
-        Route::resource('appointment', AppointmentController::class);
-});
+// Route::prefix('customer')->middleware([TokenVerificationMiddleware::class])->group(function () {
+//         Route::resource('appointment', AppointmentController::class);
+// });
 
 //Front Area
 
 // Public Routes
 Route::get('/', [HomeController::class, 'home'])->name('frontend.home');
-Route::get('/appointment', [HomeController::class, 'appointment_page'])->name('frontend.appointment');
+
+Route::get('/registration', [CustomerAuthControlle::class, 'customer_registration'])->name('customer.registration');
+Route::post('/registration', [CustomerAuthControlle::class, 'store_customer_registration']);
+
+Route::get('/login', [CustomerAuthControlle::class, 'customer_login'])->name('customer.login');
+Route::post('/login', [CustomerAuthControlle::class, 'store_customer_login']);
+
+Route::middleware([TokenVerificationMiddleware::class])->group(function () {
+    Route::get('/dashboard', [AppointmentController::class, 'dashboard']);
+    Route::get('/appointment', [AppointmentController::class, 'appointment_page'])->name('frontend.appointment');
+    Route::post('/my-appointment', [AppointmentController::class, 'store_appointment']);
+    Route::get('/logout', [AppointmentController::class, 'logout'])->name('logout');
+});

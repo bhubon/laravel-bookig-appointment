@@ -16,7 +16,12 @@
 
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/responsive.css">
-    
+
+    <link href="{{ asset('assets/css/toastify.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('assets/js/toastify-js.js') }}"></script>
+    <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+
 </head>
 
 <body>
@@ -105,6 +110,17 @@
                 <ul class="menu_btn d-flex flex-wrap align-items-center">
                     <li><a href="#" class="menu_search_icon"><i class="fal fa-search"></i></a></li>
                     <li><a href="{{ route('frontend.appointment') }}" class="common_btn">Appointment</a></li>
+                    <li class="nav-item">
+                        @auth
+                        <a class="nav-link" href="#">{{ auth()->user()->name }}<i class="far fa-plus"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="become_doctor.html">Dashboard</a></li>
+                            <li><a href="blog_details.html">logout</a></li>
+                        </ul>
+                        @else
+                        <a class="nav-link" href="{{ route('customer.login') }}">Login <i class="far fa-plus"></i></a>
+                        @endauth
+                    </li>
                 </ul>
             </div>
         </div>

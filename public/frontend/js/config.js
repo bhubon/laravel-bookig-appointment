@@ -11,7 +11,6 @@ function successToast(msg) {
         position: "center", // `left`, `center` or `right`
         text: msg,
         className: "mb-5",
-        duration: 3000,
         style: {
             background: "green",
         }
@@ -24,7 +23,6 @@ function errorToast(msg) {
         position: "center", // `left`, `center` or `right`
         text: msg,
         className: "mb-5",
-        duration: 3000,
         style: {
             background: "red",
         }
@@ -32,3 +30,18 @@ function errorToast(msg) {
 }
 
 
+function close_create_modal() {
+    $('#create-modal').modal('hide');
+}
+function close_update_modal() {
+    $('#update-modal').modal('hide');
+}
+
+function close_delete_modal(){
+    $("#delete-modal").modal('hide');
+}
+
+
+function reset_form(id) {
+    $(`#${id}`).trigger("reset");
+}

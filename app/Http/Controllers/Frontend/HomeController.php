@@ -10,7 +10,4 @@ class HomeController extends Controller {
         return view('Frontend.Pages.home');
     }
 
-    public function appointment_page(){
-        return view('Frontend.Pages.appointmen');
-    }
 }
